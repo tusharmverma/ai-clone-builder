@@ -1,6 +1,6 @@
 # 🎮 Simple Examples
 
-**Real examples of what you can do with fol-ai-match.**
+**Real examples of what you can do with ai-clone-builder.**
 
 ## Example 1: Quick Demo
 

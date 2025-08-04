@@ -1,8 +1,8 @@
 # 🎯 Project Overview
 
-## What is fol-ai-match?
+## What is ai-clone-builder?
 
-**fol-ai-match** is an AI clone system designed for dating and matchmaking scenarios. It creates realistic digital personalities that can engage in natural conversations, both with users and with each other.
+**ai-clone-builder** is an AI clone system designed for dating and matchmaking scenarios. It creates realistic digital personalities that can engage in natural conversations, both with users and with each other.
 
 ## 🧠 The Vision
 

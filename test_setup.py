@@ -165,7 +165,7 @@ def test_ai_clone():
 def run_full_test():
     """Run all tests"""
     console.print(Panel.fit(
-        "[bold blue]🚀 fol-ai-match Setup Test[/bold blue]\n"
+        "[bold blue]🚀 ai-clone-builder Setup Test[/bold blue]\n"
         "Checking if everything is ready for Week 1 development...",
         border_style="blue"
     ))

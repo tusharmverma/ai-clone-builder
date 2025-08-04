@@ -5,6 +5,7 @@ Main CLI for interacting with AI clones
 
 import sys
 import os
+import json
 from typing import List, Dict
 from rich.console import Console
 from rich.panel import Panel
@@ -16,6 +17,7 @@ from rich.text import Text
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 from src.personality.questionnaire import PersonalityQuestionnaire, create_personality_interactive
+from src.personality.question_manager import QuestionManager
 from src.ai_clone.clone import AIClone, load_clone_from_file
 from src.ai_clone.conversation import CloneConversation, run_demo_conversation
 from src.memory.simple_memory import SimpleMemory
@@ -37,7 +39,7 @@ class AICloneCLI:
     def show_welcome(self):
         """Show welcome screen"""
         welcome_text = Text()
-        welcome_text.append("🧠 fol-ai-match CLI\n", style="bold blue")
+        welcome_text.append("🧠 ai-clone-builder CLI\n", style="bold blue")
         welcome_text.append("Week 1 MVP - AI Clone Creator & Chat System\n\n", style="blue")
         welcome_text.append("Create AI clones with unique personalities and watch them chat!")
         
@@ -54,8 +56,10 @@ class AICloneCLI:
         table.add_row("3", "List All Clones")
         table.add_row("4", "Chat with Clone")
         table.add_row("5", "Clone-to-Clone Conversation")
-        table.add_row("6", "Run Demo Conversation")
-        table.add_row("7", "System Test")
+        table.add_row("6", "Run Demo Conversation") 
+        table.add_row("7", "Question Management")
+        table.add_row("8", "Update Clone with New Questions")
+        table.add_row("9", "System Test")
         table.add_row("0", "Exit")
         
         console.print(table)
@@ -238,6 +242,106 @@ class AICloneCLI:
         except Exception as e:
             console.print(f"[red]Error running test: {e}[/red]")
     
+    def question_management_menu(self):
+        """Question management interface"""
+        question_manager = QuestionManager()
+        
+        while True:
+            console.print("\n[bold blue]📋 Question Management[/bold blue]")
+            
+            table = Table(show_header=False, box=None)
+            table.add_column("Option", style="cyan")
+            table.add_column("Description", style="white")
+            
+            table.add_row("1", "List All Questions")
+            table.add_row("2", "Add New Question")
+            table.add_row("3", "Remove Question")
+            table.add_row("4", "View Question History")
+            table.add_row("0", "Back to Main Menu")
+            
+            console.print(table)
+            
+            choice = Prompt.ask("Choose option")
+            
+            if choice == "1":
+                question_manager.list_questions()
+            elif choice == "2":
+                question_manager.interactive_add_question()
+            elif choice == "3":
+                question_manager.interactive_remove_question()
+            elif choice == "4":
+                self._show_question_history(question_manager)
+            elif choice == "0":
+                break
+            else:
+                console.print("[red]Invalid choice[/red]")
+    
+    def update_clone_with_new_questions(self):
+        """Update existing clones with new questions"""
+        console.print("\n[bold green]📝 Update Clone with New Questions[/bold green]")
+        
+        # List available personality files
+        personality_files = self.list_personality_files()
+        
+        if not personality_files:
+            console.print("[yellow]No saved personalities found.[/yellow]")
+            return
+        
+        console.print("Available personalities:")
+        for i, file in enumerate(personality_files, 1):
+            name = file.replace("_personality.json", "").replace("_", " ").title()
+            console.print(f"  {i}. {name}")
+        
+        try:
+            choice = int(Prompt.ask("Choose personality to update")) - 1
+            filename = personality_files[choice]
+            
+            # Load personality data
+            with open(f"{self.personalities_dir}/{filename}", 'r') as f:
+                personality_data = json.load(f)
+            
+            # Update with new questions
+            questionnaire = PersonalityQuestionnaire()
+            updated_data = questionnaire.update_clone_with_new_questions(personality_data)
+            
+            # Save updated personality
+            with open(f"{self.personalities_dir}/{filename}", 'w') as f:
+                json.dump(updated_data, f, indent=2)
+            
+            console.print(f"[green]✅ Updated and saved: {filename}[/green]")
+            
+        except (ValueError, IndexError, FileNotFoundError) as e:
+            console.print(f"[red]Error updating clone: {e}[/red]")
+    
+    def _show_question_history(self, question_manager: QuestionManager):
+        """Show question version history"""
+        changelog = question_manager.questions_data.get("changelog", [])
+        
+        if not changelog:
+            console.print("[yellow]No version history available[/yellow]")
+            return
+        
+        table = Table(title="📈 Question Version History")
+        table.add_column("Version", style="cyan")
+        table.add_column("Date", style="yellow")
+        table.add_column("Changes", style="white")
+        table.add_column("Added", style="green")
+        table.add_column("Removed", style="red")
+        
+        for entry in changelog:
+            added = ", ".join(entry.get("questions_added", [])) or "None"
+            removed = ", ".join(entry.get("questions_removed", [])) or "None"
+            
+            table.add_row(
+                entry.get("version", ""),
+                entry.get("date", ""),
+                entry.get("changes", ""),
+                added,
+                removed
+            )
+        
+        console.print(table)
+    
     def list_personality_files(self) -> List[str]:
         """List available personality files"""
         if not os.path.exists(self.personalities_dir):
@@ -269,9 +373,13 @@ class AICloneCLI:
             elif choice == "6":
                 self.run_demo_conversation()
             elif choice == "7":
+                self.question_management_menu()
+            elif choice == "8":
+                self.update_clone_with_new_questions()
+            elif choice == "9":
                 self.run_system_test()
             elif choice == "0":
-                console.print("[blue]👋 Thanks for using fol-ai-match![/blue]")
+                console.print("[blue]👋 Thanks for using ai-clone-builder![/blue]")
                 break
             else:
                 console.print("[red]Invalid option. Please try again.[/red]")

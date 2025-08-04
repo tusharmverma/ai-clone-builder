@@ -109,7 +109,7 @@ ollama pull llama3.2:1b
 **Fix:**
 ```bash
 # Make sure you're in the right directory
-cd fol-ai-match
+cd ai-clone-builder
 
 # Check the files are there
 ls src/

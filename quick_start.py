@@ -18,7 +18,7 @@ console = Console()
 def quick_start():
     """Quick start guide"""
     console.print(Panel.fit(
-        "[bold blue]🚀 fol-ai-match Quick Start[/bold blue]\n"
+        "[bold blue]🚀 ai-clone-builder Quick Start[/bold blue]\n"
         "Let's get you up and running with AI clones in 3 steps!",
         border_style="blue"
     ))

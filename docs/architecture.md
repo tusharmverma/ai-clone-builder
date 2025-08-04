@@ -2,7 +2,7 @@
 
 ## System Overview
 
-fol-ai-match is built with a modular, extensible architecture designed for rapid iteration and easy scaling.
+ai-clone-builder is built with a modular, extensible architecture designed for rapid iteration and easy scaling.
 
 ## 📊 High-Level Architecture
 

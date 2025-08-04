@@ -1,6 +1,6 @@
 # 🚀 Setup Guide
 
-Complete installation guide for fol-ai-match AI clone system.
+Complete installation guide for ai-clone-builder AI clone system.
 
 ## ⚡ Quick Start (5 minutes)
 
@@ -118,10 +118,10 @@ python -c "import requests, rich, pydantic; print('All packages installed!')"
 #### Option B: Using conda
 ```bash
 # Create new environment
-conda create -n fol-ai-match python=3.9
+conda create -n ai-clone-builder python=3.9
 
 # Activate environment  
-conda activate fol-ai-match
+conda activate ai-clone-builder
 
 # Install packages
 pip install -r requirements.txt
@@ -147,7 +147,7 @@ pip install -r requirements.txt
 ```bash
 # Clone or download the project
 git clone [your-repo-url]
-cd fol-ai-match
+cd ai-clone-builder
 
 # Create data directories (if not already present)
 mkdir -p data/personalities data/conversations

@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+  "last_updated": "2025-08-04",
+  "categories": {
+    "basic_info": {
+      "name": {
+        "type": "text",
+        "question": "What's your name?",
+        "required": true
+      },
+      "age": {
+        "type": "text",
+        "question": "What's your age?",
+        "required": true
+      },
+      "location": {
+        "type": "text",
+        "question": "Where are you from? (city/country)",
+        "required": true
+      },
+      "occupation": {
+        "type": "text",
+        "question": "What do you do for work/study?",
+        "required": true
+      }
+    },
+    "communication_style": {
+      "formality": {
+        "type": "multiple_choice",
+        "question": "Do you prefer casual or formal conversation?",
+        "options": ["Very casual (hey, sup, lol)", "Casual (hi, cool, nice)", "Neutral", "Somewhat formal", "Very formal"],
+        "required": true
+      },
+      "humor": {
+        "type": "multiple_choice",
+        "question": "How would you describe your sense of humor?",
+        "options": ["Sarcastic/witty", "Playful/silly", "Dry/deadpan", "Dad jokes", "Not much humor", "Dark humor"],
+        "required": true
+      },
+      "expressiveness": {
+        "type": "multiple_choice",
+        "question": "Are you more reserved or expressive?",
+        "options": ["Very reserved", "Somewhat reserved", "Balanced", "Quite expressive", "Very expressive"],
+        "required": true
+      },
+      "response_length": {
+        "type": "multiple_choice",
+        "question": "Do you prefer short or detailed responses?",
+        "options": ["Very short (1-2 words)", "Short (1 sentence)", "Medium", "Detailed", "Very detailed"],
+        "required": true
+      }
+    },
+    "personality_traits": {
+      "extroversion": {
+        "type": "multiple_choice",
+        "question": "Do you gain energy from socializing or alone time?",
+        "options": ["Strongly introverted", "Somewhat introverted", "Balanced", "Somewhat extroverted", "Strongly extroverted"],
+        "required": true
+      },
+      "openness": {
+        "type": "multiple_choice",
+        "question": "How open are you to new experiences?",
+        "options": ["Very cautious", "Somewhat cautious", "Balanced", "Quite adventurous", "Very adventurous"],
+        "required": true
+      },
+      "emotional_style": {
+        "type": "multiple_choice",
+        "question": "How do you typically express emotions?",
+        "options": ["Very reserved", "Subtle hints", "Direct but calm", "Openly emotional", "Very expressive"],
+        "required": true
+      },
+      "decision_making": {
+        "type": "multiple_choice",
+        "question": "Are you more logical or intuitive in decisions?",
+        "options": ["Very logical", "Mostly logical", "Balanced", "Mostly intuitive", "Very intuitive"],
+        "required": true
+      }
+    },
+    "interests": {
+      "hobbies": {
+        "type": "text",
+        "question": "What are your main hobbies/interests? (separate with commas)",
+        "required": true
+      },
+      "topics": {
+        "type": "text",
+        "question": "What topics do you love talking about? (separate with commas)",
+        "required": true
+      },
+      "values": {
+        "type": "text",
+        "question": "What's most important to you in relationships?",
+        "required": true
+      },
+      "conversation_starters": {
+        "type": "text",
+        "question": "What kind of things do you usually talk about when meeting someone new?",
+        "required": true
+      }
+    }
+  },
+  "changelog": [
+    {
+      "version": "1.0",
+      "date": "2025-08-04",
+      "changes": "Initial question set - migrated from hardcoded questions",
+      "questions_added": [],
+      "questions_removed": []
+    }
+  ]
+} 

@@ -9,114 +9,132 @@ from rich.console import Console
 from rich.prompt import Prompt, Confirm
 from rich.panel import Panel
 from rich.text import Text
+from datetime import datetime
+
+# Import the new question manager
+try:
+    from .question_manager import QuestionManager
+except ImportError:
+    from question_manager import QuestionManager
 
 console = Console()
 
 class PersonalityQuestionnaire:
     def __init__(self):
-        self.questions = {
-            "basic_info": {
-                "name": "What's your name?",
-                "age": "What's your age?",
-                "location": "Where are you from? (city/country)",
-                "occupation": "What do you do for work/study?"
-            },
-            "communication_style": {
-                "formality": {
-                    "question": "Do you prefer casual or formal conversation?",
-                    "options": ["Very casual (hey, sup, lol)", "Casual (hi, cool, nice)", "Neutral", "Somewhat formal", "Very formal"]
-                },
-                "humor": {
-                    "question": "How would you describe your sense of humor?",
-                    "options": ["Sarcastic/witty", "Playful/silly", "Dry/deadpan", "Dad jokes", "Not much humor", "Dark humor"]
-                },
-                "expressiveness": {
-                    "question": "Are you more reserved or expressive?",
-                    "options": ["Very reserved", "Somewhat reserved", "Balanced", "Quite expressive", "Very expressive"]
-                },
-                "response_length": {
-                    "question": "Do you prefer short or detailed responses?",
-                    "options": ["Very short (1-2 words)", "Short (1 sentence)", "Medium", "Detailed", "Very detailed"]
-                }
-            },
-            "personality_traits": {
-                "extroversion": {
-                    "question": "Do you gain energy from socializing or alone time?",
-                    "options": ["Strongly introverted", "Somewhat introverted", "Balanced", "Somewhat extroverted", "Strongly extroverted"]
-                },
-                "openness": {
-                    "question": "How open are you to new experiences?",
-                    "options": ["Very cautious", "Somewhat cautious", "Balanced", "Quite adventurous", "Very adventurous"]
-                },
-                "emotional_style": {
-                    "question": "How do you typically express emotions?",
-                    "options": ["Very reserved", "Subtle hints", "Direct but calm", "Openly emotional", "Very expressive"]
-                },
-                "decision_making": {
-                    "question": "Are you more logical or intuitive in decisions?",
-                    "options": ["Very logical", "Mostly logical", "Balanced", "Mostly intuitive", "Very intuitive"]
-                }
-            },
-            "interests": {
-                "hobbies": "What are your main hobbies/interests? (separate with commas)",
-                "topics": "What topics do you love talking about? (separate with commas)",
-                "values": "What's most important to you in relationships?",
-                "conversation_starters": "What kind of things do you usually talk about when meeting someone new?"
-            }
-        }
+        self.question_manager = QuestionManager()
+        self.questions = self.question_manager.get_categories()
     
     def run_questionnaire(self, clone_name: str = None) -> Dict[str, Any]:
         """Run the complete personality questionnaire"""
         console.print(Panel.fit(
             "[bold blue]🧠 AI Clone Personality Questionnaire[/bold blue]\n"
             f"Creating personality for: {clone_name or 'New Clone'}\n"
+            f"Question Version: {self.question_manager.get_current_version()}\n"
             "This will take about 5-10 minutes.",
             border_style="blue"
         ))
         
         personality_data = {
             "clone_name": clone_name,
-            "basic_info": {},
-            "communication_style": {},
-            "personality_traits": {},
-            "interests": {}
+            "question_version": self.question_manager.get_current_version(),
+            "created_at": datetime.now().isoformat(),
         }
         
-        # Basic Info
-        console.print("\n[bold green]📋 Basic Information[/bold green]")
-        for key, question in self.questions["basic_info"].items():
-            if key == "name" and clone_name:
-                personality_data["basic_info"][key] = clone_name
-                continue
-            personality_data["basic_info"][key] = Prompt.ask(f"[cyan]{question}[/cyan]")
+        # Initialize all categories from dynamic questions
+        for category in self.questions.keys():
+            personality_data[category] = {}
         
-        # Communication Style
-        console.print("\n[bold green]💬 Communication Style[/bold green]")
-        for key, question_data in self.questions["communication_style"].items():
-            if isinstance(question_data, dict):
-                choice = self._ask_multiple_choice(question_data["question"], question_data["options"])
-                personality_data["communication_style"][key] = {
-                    "choice": choice,
-                    "index": question_data["options"].index(choice)
-                }
-            else:
-                personality_data["communication_style"][key] = Prompt.ask(f"[cyan]{question_data}[/cyan]")
-        
-        # Personality Traits
-        console.print("\n[bold green]🧠 Personality Traits[/bold green]")
-        for key, question_data in self.questions["personality_traits"].items():
-            choice = self._ask_multiple_choice(question_data["question"], question_data["options"])
-            personality_data["personality_traits"][key] = {
-                "choice": choice,
-                "index": question_data["options"].index(choice)
+        # Process all categories dynamically
+        for category, category_questions in self.questions.items():
+            # Category display names
+            category_names = {
+                "basic_info": "📋 Basic Information",
+                "communication_style": "💬 Communication Style", 
+                "personality_traits": "🧠 Personality Traits",
+                "interests": "🎯 Interests & Values"
             }
-        
-        # Interests
-        console.print("\n[bold green]🎯 Interests & Values[/bold green]")
-        for key, question in self.questions["interests"].items():
-            personality_data["interests"][key] = Prompt.ask(f"[cyan]{question}[/cyan]")
+            
+            display_name = category_names.get(category, f"📝 {category.replace('_', ' ').title()}")
+            console.print(f"\n[bold green]{display_name}[/bold green]")
+            
+            for key, question_data in category_questions.items():
+                # Handle special case for name field
+                if key == "name" and clone_name:
+                    personality_data[category][key] = clone_name
+                    continue
+                
+                # Handle different question types
+                if isinstance(question_data, dict):
+                    question_text = question_data.get("question", "")
+                    question_type = question_data.get("type", "text")
+                    
+                    if question_type == "multiple_choice" and "options" in question_data:
+                        choice = self._ask_multiple_choice(question_text, question_data["options"])
+                        personality_data[category][key] = {
+                            "choice": choice,
+                            "index": question_data["options"].index(choice)
+                        }
+                    else:
+                        # Text question
+                        personality_data[category][key] = Prompt.ask(f"[cyan]{question_text}[/cyan]")
+                else:
+                    # Legacy format (string question)
+                    personality_data[category][key] = Prompt.ask(f"[cyan]{question_data}[/cyan]")
         
         return personality_data
+    
+    def update_clone_with_new_questions(self, personality_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Update an existing clone with new questions from newer versions"""
+        missing_questions = self.question_manager.get_missing_questions(personality_data)
+        
+        if not missing_questions:
+            console.print("[green]✅ Clone is up to date with latest questions![/green]")
+            return personality_data
+        
+        console.print(Panel.fit(
+            f"[bold yellow]📝 Updating Clone: {personality_data.get('clone_name', 'Unknown')}[/bold yellow]\n"
+            f"From version {personality_data.get('question_version', '0.0')} to {self.question_manager.get_current_version()}\n"
+            f"New questions to answer: {sum(len(qs) for qs in missing_questions.values())}",
+            border_style="yellow"
+        ))
+        
+        updated_data = personality_data.copy()
+        
+        # Ask new questions by category
+        for category, category_questions in missing_questions.items():
+            if category not in updated_data:
+                updated_data[category] = {}
+            
+            category_names = {
+                "basic_info": "📋 Basic Information",
+                "communication_style": "💬 Communication Style", 
+                "personality_traits": "🧠 Personality Traits",
+                "interests": "🎯 Interests & Values"
+            }
+            
+            display_name = category_names.get(category, f"📝 {category.replace('_', ' ').title()}")
+            console.print(f"\n[bold blue]New questions in {display_name}[/bold blue]")
+            
+            for key, question_data in category_questions.items():
+                question_text = question_data.get("question", "")
+                question_type = question_data.get("type", "text")
+                
+                if question_type == "multiple_choice" and "options" in question_data:
+                    choice = self._ask_multiple_choice(question_text, question_data["options"])
+                    updated_data[category][key] = {
+                        "choice": choice,
+                        "index": question_data["options"].index(choice)
+                    }
+                else:
+                    # Text question
+                    updated_data[category][key] = Prompt.ask(f"[cyan]{question_text}[/cyan]")
+        
+        # Update version and timestamp
+        updated_data["question_version"] = self.question_manager.get_current_version()
+        updated_data["updated_at"] = datetime.now().isoformat()
+        
+        console.print(f"[green]✅ Clone updated to version {updated_data['question_version']}![/green]")
+        return updated_data
     
     def _ask_multiple_choice(self, question: str, options: list) -> str:
         """Ask a multiple choice question"""

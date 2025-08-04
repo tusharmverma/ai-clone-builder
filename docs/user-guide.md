@@ -1,6 +1,6 @@
 # 🎮 User Guide
 
-Complete guide to using fol-ai-match AI clone system.
+Complete guide to using ai-clone-builder AI clone system.
 
 ## 🚀 Getting Started
 

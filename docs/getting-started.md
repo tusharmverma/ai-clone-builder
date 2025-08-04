@@ -1,4 +1,4 @@
-# 🚀 Getting Started with fol-ai-match
+# 🚀 Getting Started with ai-clone-builder
 
 **Get your first AI clone talking in under 10 minutes!**
 
@@ -48,7 +48,7 @@ This downloads a 2GB AI model. Grab some coffee! ☕
 ```bash
 # Download the project
 git clone [your-repo-url]
-cd fol-ai-match
+cd ai-clone-builder
 
 # Install Python packages
 pip install -r requirements.txt

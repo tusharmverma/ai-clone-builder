@@ -1,4 +1,4 @@
-# fol-ai-match
+# ai-clone-builder
 
 **Create AI clones that talk like real people and watch them chat with each other.**
 
@@ -57,6 +57,8 @@ You'll watch two AI clones have a natural conversation about rock climbing, art,
 **Something broken?** → [Troubleshooting](./docs/troubleshooting.md)
 
 **Need more details?** → [Full Documentation](./docs/)
+
+**Continuing work?** → [Project Log](./docs/project-log.md) (development history)
 
 ## 🎯 Requirements
 

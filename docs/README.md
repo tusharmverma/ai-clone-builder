@@ -1,4 +1,4 @@
-# 📚 fol-ai-match Documentation
+# 📚 ai-clone-builder Documentation
 
 **Simple, clear guides to get you up and running with AI clones.**
 
@@ -7,7 +7,7 @@
 | I want to... | Read this |
 |--------------|-----------|
 | **Try it right now** | [Quick Start](#quick-start) ⚡ |
-| **Understand what this does** | [What is fol-ai-match?](#what-is-fol-ai-match) 🤔 |
+| **Understand what this does** | [What is ai-clone-builder?](#what-is-ai-clone-builder) 🤔 |
 | **See step-by-step setup** | [Getting Started Guide](./getting-started.md) 🔧 |
 | **See real examples** | [Simple Examples](./simple-examples.md) 🎮 |
 
@@ -30,7 +30,7 @@ python quick_start.py
 
 That's it! You'll see two AI clones having a natural conversation.
 
-## 🤔 What is fol-ai-match?
+## 🤔 What is ai-clone-builder?
 
 **Think of it like this:**
 - You create AI "clones" of people using questionnaires
@@ -64,6 +64,7 @@ Alex: That sounds amazing! I love that you're spreading good vibes...
 
 ### **📅 For Planners**
 - [Roadmap](./roadmap.md) - What's coming in Week 2, Month 2, etc.
+- [Project Log](./project-log.md) - Complete development history & decisions
 
 ## 🎯 What You Can Do Right Now
 
