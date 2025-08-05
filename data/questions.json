@@ -1,6 +1,7 @@
 {
-  "version": "1.0",
+  "version": "2.1",
   "last_updated": "2025-08-04",
+  "research_basis": "Based on Big Five (BFI-10/20), Communication Styles Inventory (CSI), Four-Factor Communication Model, Interpersonal Circumplex Theory, Bartholomew's Attachment Theory, Field Dependence/Independence Research, and Achievement/Affiliation/Power Motivation Theory",
   "categories": {
     "basic_info": {
       "name": {
@@ -25,86 +26,281 @@
       }
     },
     "communication_style": {
-      "formality": {
+      "primary_style": {
         "type": "multiple_choice",
-        "question": "Do you prefer casual or formal conversation?",
-        "options": ["Very casual (hey, sup, lol)", "Casual (hi, cool, nice)", "Neutral", "Somewhat formal", "Very formal"],
-        "required": true
+        "question": "When communicating, you naturally focus on:",
+        "options": ["Results and action - 'What do we need to accomplish?'", "Process and analysis - 'How should we approach this systematically?'", "People and relationships - 'Who will be affected and how do they feel?'", "Ideas and possibilities - 'What if we tried something completely different?'"],
+        "required": true,
+        "research_note": "Based on 4-Factor Communication Model (Action, Process, People, Ideas)"
       },
-      "humor": {
-        "type": "multiple_choice",
-        "question": "How would you describe your sense of humor?",
-        "options": ["Sarcastic/witty", "Playful/silly", "Dry/deadpan", "Dad jokes", "Not much humor", "Dark humor"],
-        "required": true
+      "directness": {
+        "type": "multiple_choice", 
+        "question": "When you disagree with someone, you typically:",
+        "options": ["Address it immediately and directly", "Wait for the right moment but speak clearly", "Give subtle hints and hope they notice", "Avoid confrontation and find workarounds", "Completely avoid the topic"],
+        "required": true,
+        "research_note": "Based on assertiveness research from Interpersonal Circumplex Theory"
       },
       "expressiveness": {
         "type": "multiple_choice",
-        "question": "Are you more reserved or expressive?",
-        "options": ["Very reserved", "Somewhat reserved", "Balanced", "Quite expressive", "Very expressive"],
-        "required": true
+        "question": "In conversations, people often notice you are:",
+        "options": ["Very animated - gestures, facial expressions, vocal variety", "Moderately expressive - some gestures and tone variation", "Steady - consistent tone and minimal gestures", "Reserved - controlled expressions and measured speech", "Very contained - minimal emotional display"],
+        "required": true,
+        "research_note": "Based on Communication Styles Inventory (CSI) expressiveness dimension"
       },
-      "response_length": {
+      "conversation_pace": {
         "type": "multiple_choice",
-        "question": "Do you prefer short or detailed responses?",
-        "options": ["Very short (1-2 words)", "Short (1 sentence)", "Medium", "Detailed", "Very detailed"],
-        "required": true
+        "question": "Your natural speaking and response style is:",
+        "options": ["Quick and energetic - jump right in, fast responses", "Steady and engaging - normal pace with good flow", "Thoughtful and measured - pause to consider before responding", "Deliberate and careful - take time to craft responses", "Slow and reflective - long pauses, deep consideration"],
+        "required": true,
+        "research_note": "Based on temporal aspects of communication from conversation analysis research"
       }
     },
-    "personality_traits": {
-      "extroversion": {
+    "core_personality": {
+      "extraversion": {
         "type": "multiple_choice",
-        "question": "Do you gain energy from socializing or alone time?",
-        "options": ["Strongly introverted", "Somewhat introverted", "Balanced", "Somewhat extroverted", "Strongly extroverted"],
-        "required": true
+        "question": "You are someone who is talkative, energetic, and gets excitement from social interactions:",
+        "options": ["Strongly disagree - I'm reserved and prefer quiet environments", "Somewhat disagree - I'm more introverted than extroverted", "Neither agree nor disagree - I'm balanced", "Somewhat agree - I'm generally outgoing and social", "Strongly agree - I'm very talkative and energetic around others"],
+        "required": true,
+        "research_note": "Big Five Extraversion (BFI-10 validated items)"
+      },
+      "conscientiousness": {
+        "type": "multiple_choice",
+        "question": "You are someone who is organized, responsible, and gets tasks done efficiently:",
+        "options": ["Strongly disagree - I'm spontaneous and dislike rigid schedules", "Somewhat disagree - I'm more flexible than organized", "Neither agree nor disagree - I'm moderately organized", "Somewhat agree - I value organization and follow through", "Strongly agree - I'm very disciplined and detail-oriented"],
+        "required": true,
+        "research_note": "Big Five Conscientiousness (BFI-10 validated items)"
+      },
+      "agreeableness": {
+        "type": "multiple_choice",
+        "question": "You are someone who is cooperative, trusting, and tends to assume others have good intentions:",
+        "options": ["Strongly disagree - I'm competitive and skeptical of others", "Somewhat disagree - I'm more assertive than accommodating", "Neither agree nor disagree - I balance cooperation with self-interest", "Somewhat agree - I generally trust and help others", "Strongly agree - I'm very cooperative and assume the best in people"],
+        "required": true,
+        "research_note": "Big Five Agreeableness (BFI-10 validated items)"
+      },
+      "neuroticism": {
+        "type": "multiple_choice",
+        "question": "You are someone who stays calm under pressure and rarely feels anxious or stressed:",
+        "options": ["Strongly disagree - I often feel anxious and get stressed easily", "Somewhat disagree - I'm more prone to worry than most", "Neither agree nor disagree - I have normal stress levels", "Somewhat agree - I handle stress well and stay fairly calm", "Strongly agree - I'm very emotionally stable and rarely anxious"],
+        "required": true,
+        "research_note": "Big Five Neuroticism (reverse-scored for Emotional Stability, BFI-10 validated)"
       },
       "openness": {
         "type": "multiple_choice",
-        "question": "How open are you to new experiences?",
-        "options": ["Very cautious", "Somewhat cautious", "Balanced", "Quite adventurous", "Very adventurous"],
-        "required": true
-      },
-      "emotional_style": {
-        "type": "multiple_choice",
-        "question": "How do you typically express emotions?",
-        "options": ["Very reserved", "Subtle hints", "Direct but calm", "Openly emotional", "Very expressive"],
-        "required": true
-      },
-      "decision_making": {
-        "type": "multiple_choice",
-        "question": "Are you more logical or intuitive in decisions?",
-        "options": ["Very logical", "Mostly logical", "Balanced", "Mostly intuitive", "Very intuitive"],
-        "required": true
+        "question": "You are someone who is curious, imaginative, and enjoys exploring new ideas and experiences:",
+        "options": ["Strongly disagree - I prefer routine and conventional approaches", "Somewhat disagree - I'm more practical than creative", "Neither agree nor disagree - I'm moderately open to new things", "Somewhat agree - I enjoy novelty and creative thinking", "Strongly agree - I'm very curious and love exploring new possibilities"],
+        "required": true,
+        "research_note": "Big Five Openness to Experience (BFI-10 validated items)"
       }
     },
-    "interests": {
-      "hobbies": {
+    "social_patterns": {
+      "conversation_initiation": {
+        "type": "multiple_choice",
+        "question": "In group conversations, you typically:",
+        "options": ["Lead and direct the conversation flow", "Contribute actively when topics interest you", "Listen mostly and add thoughtful comments", "Wait for others to include you", "Prefer to observe without much participation"],
+        "required": true,
+        "research_note": "Based on social dominance and interaction patterns research"
+      },
+      "conflict_response": {
+        "type": "multiple_choice",
+        "question": "When someone disagrees with your opinion, your instinct is to:",
+        "options": ["Argue your point with facts and logic", "Try to understand their perspective first", "Compromise to maintain harmony", "Change the subject to avoid tension", "Get frustrated but stay quiet"],
+        "required": true,
+        "research_note": "Based on interpersonal circumplex theory and conflict styles"
+      },
+      "emotional_processing": {
+        "type": "multiple_choice",
+        "question": "When you're feeling strong emotions (excited, upset, frustrated), you typically:",
+        "options": ["Express them immediately and openly", "Share them with close friends/family", "Process them internally before sharing", "Keep them private but let them show nonverbally", "Hide them completely and deal with them alone"],
+        "required": true,
+        "research_note": "Based on emotional regulation and expression research"
+      },
+      "decision_approach": {
+        "type": "multiple_choice",
+        "question": "When making important decisions, you mainly rely on:",
+        "options": ["Logical analysis of facts and data", "Gut feelings and intuition", "Advice from trusted people", "Past experiences and proven methods", "Careful research and multiple perspectives"],
+        "required": true,
+        "research_note": "Based on cognitive decision-making styles research"
+      }
+    },
+    "interests_values": {
+      "conversation_topics": {
         "type": "text",
-        "question": "What are your main hobbies/interests? (separate with commas)",
+        "question": "What 3-5 topics do you find yourself talking about most often? (e.g., work, movies, travel, technology, relationships)",
         "required": true
       },
-      "topics": {
-        "type": "text",
-        "question": "What topics do you love talking about? (separate with commas)",
-        "required": true
+      "core_values": {
+        "type": "multiple_choice",
+        "question": "What matters most to you in relationships and life?",
+        "options": ["Honesty and authenticity above all", "Loyalty and mutual support", "Personal growth and learning", "Fun and shared experiences", "Achievement and success"],
+        "required": true,
+        "research_note": "Based on values theory and relationship research"
       },
-      "values": {
-        "type": "text",
-        "question": "What's most important to you in relationships?",
-        "required": true
+      "social_energy": {
+        "type": "multiple_choice",
+        "question": "Your ideal way to spend free time is:",
+        "options": ["Large groups and social events", "Small gatherings with close friends", "One-on-one quality time", "Solo activities with optional company", "Complete solitude and personal projects"],
+        "required": true,
+        "research_note": "Based on extraversion and social preference research"
       },
-      "conversation_starters": {
-        "type": "text",
-        "question": "What kind of things do you usually talk about when meeting someone new?",
-        "required": true
+      "humor_style": {
+        "type": "multiple_choice",
+        "question": "Your humor style tends to be:",
+        "options": ["Quick wit and clever wordplay", "Playful teasing and silly jokes", "Dry sarcasm and deadpan delivery", "Warm storytelling and dad jokes", "Observational comedy about everyday life"],
+        "required": true,
+        "research_note": "Based on humor styles research and personality correlations"
+      }
+    },
+    "relationship_patterns": {
+      "attachment_security": {
+        "type": "multiple_choice",
+        "question": "In close relationships, you typically feel:",
+        "options": ["Comfortable with intimacy and trusting others easily", "Want closeness but worry about being hurt or rejected", "Prefer emotional distance and value independence highly", "Crave intimacy but fear others don't want to be as close", "Comfortable depending on others when needed"],
+        "required": true,
+        "research_note": "Based on Bartholomew's 4-category adult attachment model (secure, fearful-avoidant, dismissing-avoidant, preoccupied)"
+      },
+      "relationship_conflict": {
+        "type": "multiple_choice",
+        "question": "When relationships hit challenges or conflicts, you tend to:",
+        "options": ["Address issues directly and work toward resolution", "Withdraw and give yourself space to process", "Become anxious and seek immediate reassurance", "Try to fix things by being extra accommodating", "Analyze the situation logically before responding"],
+        "required": true,
+        "research_note": "Based on attachment theory and conflict resolution styles"
+      },
+      "emotional_intimacy": {
+        "type": "multiple_choice",
+        "question": "When someone wants to get emotionally close to you, you:",
+        "options": ["Welcome it and naturally open up in return", "Feel comfortable but prefer gradual deepening", "Feel somewhat uncomfortable but try to reciprocate", "Instinctively create some distance or change topics", "Analyze their motives before deciding how to respond"],
+        "required": true,
+        "research_note": "Based on attachment theory research on intimacy comfort levels"
+      },
+      "support_seeking": {
+        "type": "multiple_choice", 
+        "question": "When you're stressed or upset, you typically:",
+        "options": ["Reach out to trusted friends or family for support", "Process internally before sharing with select people", "Want comfort but struggle to ask for it directly", "Prefer to handle things completely on your own", "Seek practical advice more than emotional support"],
+        "required": true,
+        "research_note": "Based on attachment theory and help-seeking behaviors"
+      }
+    },
+    "cognitive_processing": {
+      "information_style": {
+        "type": "multiple_choice",
+        "question": "When learning something new, you prefer to:",
+        "options": ["Break it down into detailed steps and learn systematically", "Get the big picture first, then fill in details", "Jump in and learn by trial and error", "Connect it to things you already know", "Study all angles before forming conclusions"],
+        "required": true,
+        "research_note": "Based on field dependence/independence and cognitive style research"
+      },
+      "problem_solving": {
+        "type": "multiple_choice", 
+        "question": "When facing complex problems, you naturally:",
+        "options": ["Analyze each component separately and build up solutions", "Look for patterns and creative connections", "Try multiple approaches until something works", "Seek advice and collaborate with others", "Step back to see the whole situation clearly"],
+        "required": true,
+        "research_note": "Based on cognitive processing style research and problem-solving approaches"
+      },
+      "attention_focus": {
+        "type": "multiple_choice",
+        "question": "You tend to focus on:",
+        "options": ["Specific details and concrete facts", "Overall patterns and abstract concepts", "Immediate practical applications", "How things affect people and relationships", "Multiple perspectives and possibilities"],
+        "required": true,
+        "research_note": "Based on field dependence/independence and attention research"
+      },
+      "decision_speed": {
+        "type": "multiple_choice",
+        "question": "When making decisions, you typically:",
+        "options": ["Decide quickly based on gut instinct", "Gather some info then decide fairly quickly", "Take time to consider multiple options carefully", "Research extensively before deciding", "Seek input from others before choosing"],
+        "required": true,
+        "research_note": "Based on cognitive style and decision-making research"
+      }
+    },
+    "motivation_drives": {
+      "primary_motivation": {
+        "type": "multiple_choice",
+        "question": "What motivates you most in life is:",
+        "options": ["Achieving concrete goals and measurable success", "Building meaningful relationships and helping others", "Learning, growing, and expanding your understanding", "Having new experiences and avoiding boredom", "Being recognized for your unique contributions"],
+        "required": true,
+        "research_note": "Based on achievement/affiliation/power motivation and self-determination theory"
+      },
+      "success_definition": {
+        "type": "multiple_choice",
+        "question": "You feel most accomplished when:",
+        "options": ["You exceed your own high standards and goals", "You've made a positive difference in others' lives", "You've mastered something challenging or complex", "You've pushed boundaries and tried new things", "You've gained respect and recognition from others"],
+        "required": true,
+        "research_note": "Based on achievement motivation and values research"
+      },
+      "challenge_response": {
+        "type": "multiple_choice",
+        "question": "When facing difficult goals, you:",
+        "options": ["Push harder and work more intensively", "Break it down into manageable steps", "Seek support and collaborate with others", "Look for creative or unconventional approaches", "Reassess whether the goal is worth pursuing"],
+        "required": true,
+        "research_note": "Based on achievement motivation and persistence research"
+      },
+      "energy_source": {
+        "type": "multiple_choice",
+        "question": "You get most energized by:",
+        "options": ["Completing tasks and seeing concrete results", "Connecting with people and building relationships", "Discovering new ideas and insights", "Variety, change, and novel experiences", "Having influence and making important decisions"],
+        "required": true,
+        "research_note": "Based on intrinsic/extrinsic motivation and energy source research"
       }
     }
   },
   "changelog": [
     {
-      "version": "1.0",
+      "version": "1.0", 
       "date": "2025-08-04",
       "changes": "Initial question set - migrated from hardcoded questions",
       "questions_added": [],
+      "questions_removed": []
+    },
+    {
+      "version": "2.0",
+      "date": "2025-08-04", 
+      "changes": "Complete redesign based on psychological research: Big Five (BFI-10/20), Communication Styles Inventory, 4-Factor Communication Model, Interpersonal Circumplex Theory",
+      "questions_added": [
+        "communication_style.primary_style",
+        "communication_style.directness", 
+        "communication_style.conversation_pace",
+        "core_personality.extraversion",
+        "core_personality.conscientiousness",
+        "core_personality.agreeableness", 
+        "core_personality.neuroticism",
+        "social_patterns.conversation_initiation",
+        "social_patterns.conflict_response",
+        "social_patterns.emotional_processing",
+        "social_patterns.decision_approach",
+        "interests_values.core_values",
+        "interests_values.social_energy",
+        "interests_values.humor_style"
+      ],
+      "questions_removed": [
+        "communication_style.formality",
+        "communication_style.humor",
+        "communication_style.response_length",
+        "personality_traits.extroversion",
+        "personality_traits.openness",
+        "personality_traits.emotional_style", 
+        "personality_traits.decision_making",
+        "interests.hobbies",
+        "interests.topics",
+        "interests.values",
+        "interests.conversation_starters"
+      ]
+    },
+    {
+      "version": "2.1",
+      "date": "2025-08-04",
+      "changes": "Added comprehensive psychological categories: relationship patterns (attachment theory), cognitive processing (field dependence/independence), and motivation drives (achievement/affiliation/power theory)",
+      "questions_added": [
+        "relationship_patterns.attachment_security",
+        "relationship_patterns.relationship_conflict",
+        "relationship_patterns.emotional_intimacy",
+        "relationship_patterns.support_seeking",
+        "cognitive_processing.information_style",
+        "cognitive_processing.problem_solving",
+        "cognitive_processing.attention_focus",
+        "cognitive_processing.decision_speed",
+        "motivation_drives.primary_motivation",
+        "motivation_drives.success_definition",
+        "motivation_drives.challenge_response",
+        "motivation_drives.energy_source"
+      ],
       "questions_removed": []
     }
   ]
