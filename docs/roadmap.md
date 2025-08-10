@@ -1,10 +1,12 @@
 # Roadmap
 
-**What's coming next for ai-clone-builder.**
+What's coming next for ai-clone-builder.
 
 ## Week 1 (DONE)
 
-**Goal:** Get basic AI clones talking locally
+Goal: Get basic AI clones talking locally
+
+<!-- Current status and completed features -->
 
 **What we built:**
 - Personality questionnaire system

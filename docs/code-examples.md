@@ -1,10 +1,12 @@
 # What You Can Do
 
-**Simple examples of how to use your AI Clone Builder**
+Simple examples of how to use your AI Clone Builder
 
 ## Basic Things You Can Do
 
-### 1. **Create AI Clones**
+### 1. Create AI Clones
+
+<!-- Examples of core functionality -->
 - Build unique personalities through questionnaires
 - Answer questions about interests, communication style, background
 - Each clone gets their own personality file and memory system

@@ -1,10 +1,12 @@
 # How Your AI Clone Builder Works
 
-**Simple explanation of how all the pieces fit together**
+Simple explanation of how all the pieces fit together
 
 ## What's in Your Project
 
 Think of your AI Clone Builder like a well-organized house with different rooms for different purposes:
+
+<!-- This overview explains the core architecture in simple terms -->
 
 - **Main Working Parts** - Where all the magic happens
 - **Data Storage** - Where everything is saved and remembered
