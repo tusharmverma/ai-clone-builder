@@ -1,0 +1,21 @@
+{
+  "memory_types": {
+    "simple": {
+      "tests": 21,
+      "total_time": 0.0006692409515380859,
+      "avg_time": 3.186861673990885e-05
+    },
+    "enhanced": {
+      "tests": 21,
+      "total_time": 0.013000965118408203,
+      "avg_time": 0.0006190935770670573
+    },
+    "sqlite_vec": {
+      "tests": 21,
+      "total_time": 0.07143592834472656,
+      "avg_time": 0.0034017108735584075
+    }
+  },
+  "last_updated": "2025-08-10T18:14:21.427725",
+  "total_tests": 21
+}
