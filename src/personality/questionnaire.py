@@ -25,7 +25,15 @@ class QuestionnaireManager:
         self.questions_data = self._load_questions()
     
     def _load_questions(self) -> Dict[str, Any]:
-        """Load questions from JSON file"""
+        """
+        Load questions from the questions JSON file.
+        
+        This method reads the questions file and parses the JSON content
+        to get the questionnaire structure and questions.
+        
+        Returns:
+            Dict[str, Any]: The loaded questions data, or empty dict if loading fails
+        """
         try:
             with open(self.questions_file, 'r') as f:
                 self.questions = json.load(f)
@@ -38,7 +46,22 @@ class QuestionnaireManager:
             return {}
     
     def create_personality(self, name: str) -> Dict[str, Any]:
-        """Create a personality through interactive questionnaire"""
+        """
+        Create a personality through an interactive questionnaire.
+        
+        This method guides users through creating a complete personality
+        by asking questions from different categories. It processes each
+        category sequentially and builds a comprehensive personality profile.
+        
+        Args:
+            name (str): The name for the AI clone being created
+            
+        Returns:
+            Dict[str, Any]: Complete personality data structure
+            
+        Raises:
+            Exception: If questions are not loaded or no categories found
+        """
         if not self.questions:
             raise Exception("Questions not loaded or questions file is empty")
         
@@ -74,7 +97,20 @@ class QuestionnaireManager:
         return personality_data
     
     def _process_category(self, category_key: str, category_data: Dict, personality_data: Dict) -> bool:
-        """Process a single question category"""
+        """
+        Process a single question category from the questionnaire.
+        
+        This method handles the display and processing of all questions
+        within a specific category, such as "basic_info" or "personality_traits".
+        
+        Args:
+            category_key (str): The key identifier for the category
+            category_data (Dict): The category data containing questions
+            personality_data (Dict): The personality data being built
+            
+        Returns:
+            bool: True if processing should continue, False if user wants to quit
+        """
         category_name = category_data.get("name", category_key.replace("_", " ").title())
         category_desc = category_data.get("description", "")
         
@@ -104,7 +140,21 @@ class QuestionnaireManager:
         return True
     
     def _process_question(self, stage: str, q_key: str, q_data: Dict, personality_data: Dict) -> bool:
-        """Process a single question within a stage"""
+        """
+        Process a single question within a stage.
+        
+        This method handles the display and processing of individual questions
+        based on their type (single choice, multiple choice, scale, etc.).
+        
+        Args:
+            stage (str): The stage identifier for the question
+            q_key (str): The key identifier for the question
+            q_data (Dict): The question data containing text, type, and options
+            personality_data (Dict): The personality data being built
+            
+        Returns:
+            bool: True if question was processed successfully, False otherwise
+        """
         question_text = q_data.get("text", q_key)
         question_type = q_data.get("type", "single_choice")
         
@@ -134,7 +184,21 @@ class QuestionnaireManager:
         return True
     
     def _process_question_item(self, category_key: str, question_data: Dict, personality_data: Dict) -> bool:
-        """Process a single question item from the new structure"""
+        """
+        Process a single question item from the new structure.
+        
+        This method handles the display and processing of individual questions
+        within a category, supporting various question types and storing responses
+        in the appropriate section of the personality data.
+        
+        Args:
+            category_key (str): The key identifier for the category
+            question_data (Dict): The question data containing text, type, and options
+            personality_data (Dict): The personality data being built
+            
+        Returns:
+            bool: True if question was processed successfully, False otherwise
+        """
         question_id = question_data.get("id", "unknown")
         question_text = question_data.get("text", question_id)
         question_type = question_data.get("type", "single_choice")
@@ -182,7 +246,18 @@ class QuestionnaireManager:
             return False
     
     def _ask_single_choice(self, question: Dict[str, Any]) -> str:
-        """Ask a single choice question"""
+        """
+        Ask a single choice question and return the user's selection.
+        
+        This method displays the available options for a single choice question
+        and handles special cases like "Other" options that require additional input.
+        
+        Args:
+            question (Dict[str, Any]): Question data containing options and metadata
+            
+        Returns:
+            str: The selected option or custom description for "Other" options
+        """
         options = question["options"]
         
         # Display options
@@ -215,7 +290,18 @@ class QuestionnaireManager:
                 console.print("[red]Please enter a valid number[/red]")
     
     def _ask_multiple_choice(self, question: Dict[str, Any]) -> List[str]:
-        """Ask a multiple choice question"""
+        """
+        Ask a multiple choice question and return the user's selections.
+        
+        This method allows users to select multiple options from a list,
+        with support for maximum selection limits and special "Other" options.
+        
+        Args:
+            question (Dict[str, Any]): Question data containing options and metadata
+            
+        Returns:
+            List[str]: List of selected options
+        """
         options = question["options"]
         max_selections = question.get("max_selections", len(options))
         
@@ -264,7 +350,18 @@ class QuestionnaireManager:
         return selected
     
     def _ask_scale(self, question: Dict[str, Any]) -> int:
-        """Ask a scale question"""
+        """
+        Ask a scale question and return the user's rating.
+        
+        This method presents a numerical scale with optional labels and
+        validates that the input falls within the specified range.
+        
+        Args:
+            question (Dict[str, Any]): Question data containing scale range and labels
+            
+        Returns:
+            int: The selected rating value
+        """
         min_val = question.get("min", 1)
         max_val = question.get("max", 5)
         labels = question.get("labels", {})
@@ -288,7 +385,18 @@ class QuestionnaireManager:
                 console.print("[red]Please enter a valid number[/red]")
     
     def _ask_combined_choice(self, question: Dict[str, Any]) -> Dict[str, str]:
-        """Ask a combined choice question (category + reason)"""
+        """
+        Ask a combined choice question requiring both category and reason selection.
+        
+        This method handles questions that need two related selections,
+        such as choosing a category and then providing a reason for that choice.
+        
+        Args:
+            question (Dict[str, Any]): Question data containing category and reason options
+            
+        Returns:
+            Dict[str, str]: Dictionary with 'category' and 'reason' keys
+        """
         category_options = question["category_options"]
         reason_options = question["reason_options"]
         
@@ -318,7 +426,21 @@ class QuestionnaireManager:
         }
     
     def _ask_text_input(self, question: Dict[str, Any]) -> str:
-        """Ask a text input question"""
+        """
+        Ask a text input question and return the user's response.
+        
+        This method handles free-text responses with optional length limits
+        and placeholder text. It also provides a way to quit the questionnaire.
+        
+        Args:
+            question (Dict[str, Any]): Question data containing input constraints
+            
+        Returns:
+            str: The user's text response
+            
+        Raises:
+            KeyboardInterrupt: If the user chooses to quit the questionnaire
+        """
         placeholder = question.get("placeholder", "")
         max_length = question.get("max_length", 50)  # Default max 50 characters
         
@@ -342,7 +464,21 @@ class QuestionnaireManager:
                 console.print("[red]Please provide an answer[/red]")
     
     def _ask_number_input(self, question: Dict[str, Any]) -> int:
-        """Ask a number input question"""
+        """
+        Ask a number input question and return the user's response.
+        
+        This method handles numerical input with optional range validation
+        and placeholder text. It also provides a way to quit the questionnaire.
+        
+        Args:
+            question (Dict[str, Any]): Question data containing number constraints
+            
+        Returns:
+            int: The user's numerical response
+            
+        Raises:
+            KeyboardInterrupt: If the user chooses to quit the questionnaire
+        """
         min_val = question.get("min", 0)
         max_val = question.get("max", 999)
         placeholder = question.get("placeholder", "")
@@ -369,7 +505,16 @@ class QuestionnaireManager:
                 console.print("[red]Please enter a valid number[/red]")
     
     def update_existing_clones(self, stage: str = "stage_1") -> None:
-        """Update existing clones with new questions from a specific stage"""
+        """
+        Update existing clones with new questions from a specific stage.
+        
+        This method scans the personalities directory for existing clone files
+        and updates them with new questions from the specified stage if they
+        don't already have that stage completed.
+        
+        Args:
+            stage (str): The stage identifier to add to existing clones
+        """
         console.print(Panel.fit(
             f"[bold blue]Updating Existing Clones[/bold blue]\n"
             f"Adding new questions from {stage} to existing personalities",
@@ -415,6 +560,57 @@ class QuestionnaireManager:
                     console.print(f"[red]Error updating {filename}: {e}[/red]")
         
         console.print(f"\n[bold green]Updated {updated_count} clones![/bold green]")
+    
+    def get_categories(self) -> Dict[str, Any]:
+        """
+        Get all available question categories.
+        
+        Returns:
+            Dict[str, Any]: Dictionary containing all question categories
+        """
+        return self.questions_data.get("categories", {})
+    
+    def get_stages(self) -> Dict[str, Any]:
+        """
+        Get all available question stages.
+        
+        Returns:
+            Dict[str, Any]: Dictionary containing all question stages
+        """
+        return self.questions_data.get("stages", {})
+    
+    def get_version(self) -> str:
+        """
+        Get the questionnaire version.
+        
+        Returns:
+            str: The questionnaire version string
+        """
+        return self.questions_data.get("version", "Unknown")
+    
+    def _complete_stage(self, stage: str, categories: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Complete a specific stage by processing its questions.
+        
+        This method processes all questions for a given stage and returns
+        the completed stage data.
+        
+        Args:
+            stage (str): The stage identifier to complete
+            categories (Dict[str, Any]): Available question categories
+            
+        Returns:
+            Dict[str, Any]: Completed stage data
+        """
+        stage_data = {}
+        
+        # Find categories for this stage
+        for category_key, category_data in categories.items():
+            if category_key.startswith(stage):
+                if not self._process_category(category_key, category_data, stage_data):
+                    break
+        
+        return stage_data
 
 def main():
     """Main function for questionnaire interaction"""

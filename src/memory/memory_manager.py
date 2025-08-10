@@ -54,111 +54,182 @@ class MemoryManager:
         self.memory = self._get_memory(self.current_memory_type)
     
     def _load_performance_data(self) -> Dict:
-        """Load historical performance data"""
-        if os.path.exists(self.performance_file):
+        """
+        Load performance data from the performance tracking file.
+        
+        This method reads the performance data JSON file to track
+        memory system performance over time. If the file doesn't exist,
+        it creates a default structure.
+        
+        Returns:
+            Dict: Performance data structure with test results and timing
+        """
+        performance_file = os.path.join(self.data_dir, "memory_performance", f"{self.clone_name}_performance.json")
+        
+        if os.path.exists(performance_file):
             try:
-                with open(self.performance_file, 'r') as f:
+                with open(performance_file, 'r') as f:
                     return json.load(f)
-            except:
-                pass
+            except Exception as e:
+                print(f"Error loading performance data: {e}")
+        
         return {
-            "memory_types": {},
-            "last_updated": datetime.now().isoformat(),
-            "total_tests": 0
+            "total_tests": 0,
+            "memory_types": {}
         }
     
     def _save_performance_data(self):
-        """Save performance data"""
-        self.performance_data["last_updated"] = datetime.now().isoformat()
-        with open(self.performance_file, 'w') as f:
-            json.dump(self.performance_data, f, indent=2)
+        """
+        Save performance data to the performance tracking file.
+        
+        This method persists performance data to disk, creating
+        the necessary directory structure if it doesn't exist.
+        """
+        performance_dir = os.path.join(self.data_dir, "memory_performance")
+        os.makedirs(performance_dir, exist_ok=True)
+        
+        performance_file = os.path.join(performance_dir, f"{self.clone_name}_performance.json")
+        
+        try:
+            with open(performance_file, 'w') as f:
+                json.dump(self.performance_data, f, indent=2)
+        except Exception as e:
+            print(f"Error saving performance data: {e}")
     
     def _get_memory(self, memory_type: str):
-        """Get or create memory instance"""
+        """
+        Get or create a memory instance of the specified type.
+        
+        This method instantiates the appropriate memory class based
+        on the memory type string. It caches instances to avoid
+        recreating them unnecessarily.
+        
+        Args:
+            memory_type (str): Type of memory to create ('simple', 'enhanced', 'sqlite_vec')
+            
+        Returns:
+            Memory instance: The requested memory system instance
+            
+        Raises:
+            ValueError: If an unknown memory type is specified
+        """
         if memory_type not in self.memories:
-            try:
-                if memory_type == "simple":
-                    return SimpleMemory(self.clone_name)
-                elif memory_type == "enhanced":
-                    return EnhancedMemory(self.clone_name)
-                elif memory_type == "sqlite_vec":
-                    return SqliteVecMemory(self.clone_name)
-                else:
-                    print(f"Unknown memory type: {memory_type}, using enhanced")
-                    return EnhancedMemory(self.clone_name)
-            except Exception as e:
-                print(f"Failed to initialize {memory_type} memory: {e}")
-                return EnhancedMemory(self.clone_name)
+            if memory_type == "simple":
+                self.memories[memory_type] = SimpleMemory(self.clone_name)
+            elif memory_type == "enhanced":
+                self.memories[memory_type] = EnhancedMemory(self.clone_name)
+            elif memory_type == "sqlite_vec":
+                self.memories[memory_type] = SqliteVecMemory(self.clone_name)
+            else:
+                raise ValueError(f"Unknown memory type: {memory_type}")
         
         return self.memories[memory_type]
     
     def _select_best_memory_type(self) -> str:
-        """Intelligently select the best memory type based on data and performance"""
+        """
+        Automatically select the best memory type based on performance and data size.
         
-        # Prioritize SQLite vector memory as the primary choice
-        try:
-            # Test if SQLite vector memory is available
-            test_memory = SqliteVecMemory(self.clone_name)
-            if test_memory.conn:
-                print("✅ SQLite vector memory available - using as primary system")
-                return "sqlite_vec"
-        except Exception as e:
-            print(f"⚠️ SQLite vector memory not available: {e}")
+        This method analyzes performance data and estimated data size to
+        determine the optimal memory system. It considers factors like
+        response time, data complexity, and system resources.
         
+        Returns:
+            str: The best performing memory type for the current situation
+        """
         # Check if we have performance data
         if not self.performance_data.get("memory_types"):
-            # No performance data, use enhanced as fallback
-            print("⚠️ No performance data - using enhanced memory as fallback")
-            return "enhanced"
+            return "simple"  # Default to simple if no data
         
-        # Get best performing memory from historical data
+        # Get the best performing memory type
         best_type = self._get_best_performing_memory()
-        print(f"📊 Using best performing memory: {best_type}")
+        
+        # Estimate data size to see if we need to switch
+        estimated_size = self._estimate_data_size()
+        
+        # If data is getting large, prefer enhanced or sqlite_vec
+        if estimated_size > 1000 and best_type == "simple":
+            if "enhanced" in self.performance_data.get("memory_types", {}):
+                best_type = "enhanced"
+            elif "sqlite_vec" in self.performance_data.get("memory_types", {}):
+                best_type = "sqlite_vec"
+        
         return best_type
     
     def _estimate_data_size(self) -> int:
-        """Estimate current data size"""
-        try:
-            # Try to get message count from any available memory
-            for memory_type in ["sqlite_vec", "enhanced", "simple"]:
-                try:
-                    memory = self._get_memory(memory_type)
-                    if hasattr(memory, 'get_memory_stats'):
-                        stats = memory.get_memory_stats()
-                        return stats.get('total_messages', 0)
-                except:
-                    continue
-        except:
-            pass
+        """
+        Estimate the size of the current conversation data.
+        
+        This method provides a rough estimate of data complexity
+        to help determine if a more sophisticated memory system
+        would be beneficial.
+        
+        Returns:
+            int: Estimated data size/complexity score
+        """
+        if not self.memory:
+            return 0
+        
+        # Simple estimation based on conversation history
+        if hasattr(self.memory, 'conversation_history'):
+            return len(self.memory.conversation_history)
+        elif hasattr(self.memory, 'get_memory_stats'):
+            stats = self.memory.get_memory_stats()
+            return stats.get('total_messages', 0)
+        
         return 0
     
     def _get_best_performing_memory(self) -> str:
-        """Get the best performing memory type based on historical data"""
-        memory_types = self.performance_data.get("memory_types", {})
+        """
+        Get the memory type with the best average performance.
         
-        if not memory_types:
-            return "enhanced"
+        This method analyzes performance data to find the memory
+        system with the lowest average response time.
         
-        # Calculate average response time for each memory type
-        best_memory = "enhanced"
-        best_time = float('inf')
+        Returns:
+            str: The best performing memory type based on timing data
+        """
+        best_type = "simple"
+        best_avg = float('inf')
         
-        for memory_type, data in memory_types.items():
+        for memory_type, data in self.performance_data.get("memory_types", {}).items():
             if data.get("tests", 0) > 0:
-                avg_time = data.get("total_time", 0) / data.get("tests", 1)
-                if avg_time < best_time:
-                    best_time = avg_time
-                    best_memory = memory_type
+                avg_time = data.get("avg_time", float('inf'))
+                if avg_time < best_avg:
+                    best_avg = avg_time
+                    best_type = memory_type
         
-        return best_memory
+        return best_type
     
     def add_message(self, speaker: str, content: str, metadata: Dict = None):
-        """Add message to current memory system"""
+        """
+        Add a message to the current memory system.
+        
+        This method delegates message storage to the currently active
+        memory system, ensuring all messages are properly stored.
+        
+        Args:
+            speaker (str): Who said the message
+            content (str): The message content
+            metadata (Dict, optional): Additional message metadata
+        """
         if self.memory:
             self.memory.add_message(speaker, content, metadata)
     
     def get_smart_context(self, message: str, max_total: int = 8) -> str:
-        """Get smart context from current memory system"""
+        """
+        Get smart context from the current memory system.
+        
+        This method retrieves relevant conversation context to help
+        generate more coherent responses. It tries different context
+        methods based on what the memory system supports.
+        
+        Args:
+            message (str): The current message to get context for
+            max_total (int): Maximum number of context items to return
+            
+        Returns:
+            str: Relevant conversation context or fallback message
+        """
         if self.memory and hasattr(self.memory, 'get_smart_context'):
             return self.memory.get_smart_context(message, max_total)
         elif self.memory and hasattr(self.memory, 'get_context'):
@@ -167,13 +238,33 @@ class MemoryManager:
             return "No previous conversation."
     
     def search_messages(self, query: str, limit: int = 10) -> List[Dict]:
-        """Search messages using current memory system"""
+        """
+        Search messages using the current memory system.
+        
+        This method delegates search functionality to the active memory
+        system, allowing users to find specific conversations or topics.
+        
+        Args:
+            query (str): Search query to find relevant messages
+            limit (int): Maximum number of results to return
+            
+        Returns:
+            List[Dict]: List of matching messages with metadata
+        """
         if self.memory and hasattr(self.memory, 'search_messages'):
             return self.memory.search_messages(query, limit)
         return []
     
     def get_memory_stats(self) -> Dict[str, Any]:
-        """Get stats from current memory system"""
+        """
+        Get statistics from the current memory system.
+        
+        This method retrieves performance and usage statistics from
+        the active memory system, including the memory manager type.
+        
+        Returns:
+            Dict[str, Any]: Memory statistics and system information
+        """
         if self.memory and hasattr(self.memory, 'get_memory_stats'):
             stats = self.memory.get_memory_stats()
             stats["memory_manager_type"] = self.current_memory_type
@@ -181,18 +272,41 @@ class MemoryManager:
         return {"memory_manager_type": self.current_memory_type, "total_messages": 0}
     
     def save_memory(self):
-        """Save current memory"""
+        """
+        Save the current memory system's data.
+        
+        This method ensures that all memory data is persisted
+        to disk for future use.
+        """
         if self.memory and hasattr(self.memory, 'save_memory'):
             self.memory.save_memory()
     
     def close(self):
-        """Close all memory systems"""
+        """
+        Close all memory systems and clean up resources.
+        
+        This method properly shuts down all memory instances
+        to prevent data corruption and free system resources.
+        """
         for memory in self.memories.values():
             if hasattr(memory, 'close'):
                 memory.close()
     
     def performance_test(self, test_messages: List[str] = None) -> Dict[str, float]:
-        """Run performance test on all memory types"""
+        """
+        Run performance test on all memory types.
+        
+        This method tests the performance of all available memory systems
+        by adding test messages and measuring response times. It updates
+        the performance data for future memory type selection decisions.
+        
+        Args:
+            test_messages (List[str], optional): Custom test messages to use.
+                If None, uses default test messages.
+                
+        Returns:
+            Dict[str, float]: Performance results for each memory type with timing data
+        """
         if not test_messages:
             test_messages = [
                 "Hello, how are you?",
@@ -250,7 +364,16 @@ class MemoryManager:
         return results
     
     def switch_memory_type(self, new_type: str):
-        """Switch to a different memory type"""
+        """
+        Switch to a different memory type.
+        
+        This method allows manual switching between memory systems.
+        It updates the current memory instance and maintains the
+        existing conversation data.
+        
+        Args:
+            new_type (str): The memory type to switch to ('simple', 'enhanced', 'sqlite_vec')
+        """
         if new_type in ["simple", "enhanced", "sqlite_vec"]:
             self.current_memory_type = new_type
             self.memory = self._get_memory(new_type)
@@ -259,7 +382,16 @@ class MemoryManager:
             print(f"Unknown memory type: {new_type}")
     
     def get_performance_report(self) -> str:
-        """Get a performance report"""
+        """
+        Get a comprehensive performance report.
+        
+        This method generates a formatted report showing performance
+        statistics for all memory types, including average response times
+        and test counts.
+        
+        Returns:
+            str: Formatted performance report with timing and test data
+        """
         report = f"Memory Performance Report for {self.clone_name}\n"
         report += f"Current memory type: {self.current_memory_type}\n"
         report += f"Total tests run: {self.performance_data.get('total_tests', 0)}\n\n"

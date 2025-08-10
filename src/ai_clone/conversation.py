@@ -81,7 +81,16 @@ class CloneConversation:
         ]
     
     def start_conversation(self, max_turns: int = 10):
-        """Start a conversation between two clones"""
+        """
+        Start a conversation between two AI clones.
+        
+        This method initiates a conversation between the two clones, taking turns
+        to respond to each other. It handles the conversation flow and displays
+        messages in a formatted way.
+        
+        Args:
+            max_turns (int): Maximum number of conversation turns (default: 10)
+        """
         console.print(Panel.fit(
             f"[bold blue]Starting Conversation[/bold blue]\n"
             f"{self.clone1.name} and {self.clone2.name} will chat for up to {max_turns} turns",
@@ -126,7 +135,21 @@ class CloneConversation:
         console.print(f"Messages saved to memory for both clones")
     
     def run_conversation(self, scenario: str = None, max_turns: int = 10, delay: float = 2.0):
-        """Run a full conversation between clones"""
+        """
+        Run a full conversation between clones with scenario context.
+        
+        This method creates a more structured conversation by providing a specific
+        scenario context and managing the conversation flow through the conversation
+        manager. It handles turn-taking and saves the conversation to memory.
+        
+        Args:
+            scenario (str, optional): A specific scenario to set the conversation context
+            max_turns (int): Maximum number of conversation turns (default: 10)
+            delay (float): Delay between messages in seconds (default: 2.0)
+            
+        Returns:
+            List[Dict]: The complete conversation history
+        """
         # Start conversation and get conversation ID
         conv_id = self.conversation_manager.start_conversation(self.clone1.name, self.clone2.name, scenario)
         
@@ -183,7 +206,16 @@ class CloneConversation:
         return conversation_history
     
     def _display_message(self, speaker: str, message: str):
-        """Display a message with appropriate styling"""
+        """
+        Display a message with appropriate styling based on the speaker.
+        
+        This method formats and displays messages with color coding to distinguish
+        between different speakers in the conversation.
+        
+        Args:
+            speaker (str): The name of the person speaking
+            message (str): The message content to display
+        """
         if speaker == self.clone1.name:
             color = "blue"
         elif speaker == self.clone2.name:
@@ -195,7 +227,19 @@ class CloneConversation:
         console.print(f"[{color}]{message}[/{color}]")
     
     def _build_context_prompt(self, recent_history: List[Dict], initial_context: str) -> str:
-        """Build a context prompt for the AI"""
+        """
+        Build a context prompt for the AI based on recent conversation history.
+        
+        This method creates a prompt that gives the AI context about what was
+        recently said, helping maintain conversation continuity.
+        
+        Args:
+            recent_history (List[Dict]): Recent conversation messages
+            initial_context (str): The initial scenario or context
+            
+        Returns:
+            str: A formatted prompt with conversation context
+        """
         if not recent_history:
             return "Continue the conversation naturally."
         
@@ -208,7 +252,19 @@ class CloneConversation:
         return prompt
     
     def _should_end_conversation(self, response: str, turn: int) -> bool:
-        """Determine if conversation should end naturally"""
+        """
+        Determine if the conversation should end naturally.
+        
+        This method analyzes the response content and turn number to decide
+        if the conversation has reached a natural conclusion.
+        
+        Args:
+            response (str): The last response from a clone
+            turn (int): The current turn number
+            
+        Returns:
+            bool: True if the conversation should end, False otherwise
+        """
         ending_indicators = [
             "nice talking to you",
             "i should get going",
@@ -225,7 +281,16 @@ class CloneConversation:
         return any(indicator in response_lower for indicator in ending_indicators)
     
     def get_conversation_summary(self) -> Dict[str, Any]:
-        """Get a summary of the current conversation"""
+        """
+        Get a summary of the current conversation.
+        
+        This method retrieves metadata about the active conversation including
+        the conversation ID, participants, total message count, and the last
+        message exchanged.
+        
+        Returns:
+            Dict[str, Any]: Summary containing conversation metadata, or error dict if no active conversation
+        """
         if not self.current_conversation_id:
             return {"error": "No active conversation"}
         
@@ -239,7 +304,17 @@ class CloneConversation:
         }
 
 def run_demo_conversation():
-    """Run a demo conversation with pre-built clones"""
+    """
+    Run a demo conversation with pre-built AI clones.
+    
+    This function creates two demo AI clones with predefined personalities
+    and runs a conversation between them to showcase the system's capabilities.
+    The demo includes scenario-based conversation with natural turn-taking
+    and displays the conversation in real-time.
+    
+    Returns:
+        List[Dict]: The complete conversation history, or None if the demo fails
+    """
     console.print(Panel.fit(
         "[bold blue]Demo Conversation[/bold blue]\n"
         "Creating two AI clones and watching them chat...",
@@ -276,7 +351,17 @@ def run_demo_conversation():
         return None
 
 def interactive_conversation_setup():
-    """Interactive setup for clone conversations"""
+    """
+    Interactive setup for clone conversations.
+    
+    This function provides an interactive interface for users to set up
+    conversations between their saved AI clones. It currently defaults
+    to running the demo conversation but is designed to be extended
+    with user personality selection and custom scenario creation.
+    
+    Returns:
+        List[Dict]: The conversation history from the selected conversation type
+    """
     console.print(Panel.fit(
         "[bold blue]Interactive Conversation Setup[/bold blue]\n"
         "Set up a conversation between your AI clones",

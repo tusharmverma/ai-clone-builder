@@ -96,7 +96,23 @@ class AIClone:
             print("Make sure Ollama is running: ollama serve")
     
     def respond(self, message: str, context: List[Dict] = None) -> str:
-        """Generate a response to a message"""
+        """
+        Generate a personality-driven response to a message.
+        
+        This is the main method that handles conversation flow. It:
+        1. Analyzes the message complexity and context
+        2. Generates intelligent response length instructions
+        3. Builds a comprehensive prompt including personality and memory
+        4. Calls the LLM with optimized parameters
+        5. Post-processes the response for natural flow
+        
+        Args:
+            message (str): The incoming message to respond to
+            context (List[Dict], optional): Recent conversation context for memory
+            
+        Returns:
+            str: A personality-appropriate response that matches the clone's traits
+        """
         try:
             # Get conversation context
             if context is None:
@@ -123,7 +139,22 @@ class AIClone:
             return error_msg
     
     def _build_prompt(self, message: str, context: List[Dict]) -> str:
-        """Build the complete prompt for Ollama"""
+        """
+        Build the complete prompt for Ollama including personality and context.
+        
+        This method constructs a comprehensive prompt that includes:
+        - The clone's personality system prompt
+        - Recent conversation context from memory
+        - Intelligent response length instructions
+        - The current message to respond to
+        
+        Args:
+            message (str): The current message to respond to
+            context (List[Dict]): Recent conversation history for context
+            
+        Returns:
+            str: Complete prompt ready for LLM processing
+        """
         # Start with system prompt
         prompt = f"{self.system_prompt}\n\n"
         
@@ -147,7 +178,22 @@ class AIClone:
         return prompt
     
     def _get_response_length_instruction(self, message: str) -> str:
-        """Get intelligent response length instruction based on message and personality"""
+        """
+        Generate intelligent response length instructions based on message complexity and personality.
+        
+        This method analyzes the incoming message and the clone's personality to create
+        specific instructions for the LLM about how to respond. It considers:
+        - Message complexity (greeting, question, complex request)
+        - Personality traits (extraversion, expressiveness)
+        - Age-appropriate language patterns
+        - Communication style preferences
+        
+        Args:
+            message (str): The incoming message to analyze
+            
+        Returns:
+            str: Specific instructions for the LLM about response style and length
+        """
         try:
             # Get personality preferences
             comm_style = self.personality_data.get("communication_style", {})
@@ -215,7 +261,22 @@ class AIClone:
             return "Keep your response natural and appropriate to the conversation."
     
     def _call_ollama(self, prompt: str) -> str:
-        """Call Ollama API to generate response"""
+        """
+        Call the Ollama API to generate a response using the configured model.
+        
+        This method handles the communication with the local Ollama server,
+        including error handling and response processing. It uses optimized
+        parameters for better response quality and consistency.
+        
+        Args:
+            prompt (str): The complete prompt to send to the LLM
+            
+        Returns:
+            str: The raw response from the LLM
+            
+        Raises:
+            Exception: If the API call fails or returns an error
+        """
         try:
             payload = {
                 "model": self.model,
@@ -249,7 +310,16 @@ class AIClone:
             raise Exception(f"Error calling Ollama: {str(e)}")
     
     def _get_response_length_constraint(self) -> int:
-        """Get response length constraint based on personality"""
+        """
+        Get the maximum response length constraint based on personality preferences.
+        
+        This method reads the clone's communication style preferences to determine
+        how long responses should be. It's used as a fallback when the LLM doesn't
+        follow the prompt instructions.
+        
+        Returns:
+            int: Maximum character length for responses
+        """
         try:
             comm_style = self.personality_data.get("communication_style", {})
             response_length = comm_style.get("response_length", {}).get("choice", "")
@@ -268,7 +338,21 @@ class AIClone:
             return 150
     
     def _post_process_response(self, response: str) -> str:
-        """Post-process the AI response to match personality"""
+        """
+        Post-process the AI response to ensure it matches personality preferences.
+        
+        This method applies intelligent post-processing to the LLM response:
+        - Cleans up formatting and whitespace
+        - Only truncates if the model significantly ignored length instructions
+        - Applies age-appropriate language adjustments
+        - Maintains natural conversation flow
+        
+        Args:
+            response (str): The raw response from the LLM
+            
+        Returns:
+            str: Processed response that matches personality preferences
+        """
         try:
             # Clean up the response
             response = response.strip()
@@ -300,7 +384,21 @@ class AIClone:
             return response.strip()
     
     def _intelligently_shorten_response(self, response: str, max_length: int, age: int) -> str:
-        """Intelligently shorten response while maintaining personality"""
+        """
+        Intelligently shorten a response while maintaining personality and readability.
+        
+        This method attempts to preserve complete sentences when shortening responses,
+        falling back to word-level truncation if necessary. It considers the clone's
+        age to apply appropriate language patterns.
+        
+        Args:
+            response (str): The response to shorten
+            max_length (int): Maximum allowed length
+            age (int): The clone's age for language style considerations
+            
+        Returns:
+            str: Shortened response that fits within length constraints
+        """
         if len(response) <= max_length:
             return response
         
@@ -337,7 +435,19 @@ class AIClone:
         return shortened.strip()
     
     def _condense_sentence(self, sentence: str, age: int) -> str:
-        """Condense a sentence based on age-appropriate language"""
+        """
+        Condense a sentence based on age-appropriate language patterns.
+        
+        This method applies age-specific condensation rules to maintain
+        personality consistency while meeting length requirements.
+        
+        Args:
+            sentence (str): The sentence to condense
+            age (int): The clone's age for style considerations
+            
+        Returns:
+            str: Condensed sentence with age-appropriate language
+        """
         # Simple condensation for very short responses
         if age < 20:
             # Gen Z style - very concise
@@ -353,7 +463,16 @@ class AIClone:
         return sentence
     
     def add_to_conversation_history(self, speaker: str, message: str):
-        """Add a message to conversation history"""
+        """
+        Add a message to the conversation history for this clone.
+        
+        This method maintains a local conversation history that can be used
+        for context in future responses and for saving conversations.
+        
+        Args:
+            speaker (str): Who said the message (User or clone name)
+            message (str): The message content
+        """
         timestamp = datetime.now().isoformat()
         entry = {
             "speaker": speaker,
@@ -371,11 +490,28 @@ class AIClone:
                 print(f"Warning: Could not add to memory: {e}")
     
     def get_recent_history(self, count: int = 10) -> List[Dict]:
-        """Get recent conversation history"""
+        """
+        Get the most recent conversation history entries.
+        
+        Args:
+            count (int): Number of recent entries to return (default: 10)
+            
+        Returns:
+            List[Dict]: List of conversation entries with speaker, message, and timestamp
+        """
         return self.conversation_history[-count:] if self.conversation_history else []
     
     def save_conversation(self, filename: str = None):
-        """Save conversation to file"""
+        """
+        Save the conversation history to a JSON file.
+        
+        This method exports the conversation history to a file for later
+        review or analysis. If no filename is provided, it generates one
+        based on the clone name and current timestamp.
+        
+        Args:
+            filename (str, optional): Custom filename for the conversation
+        """
         if not filename:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             filename = f"data/conversations/{self.name}_{timestamp}_conversation.json"
@@ -396,7 +532,15 @@ class AIClone:
         return filename
     
     def load_conversation(self, filename: str):
-        """Load conversation from file"""
+        """
+        Load a conversation history from a JSON file.
+        
+        This method imports conversation history from a previously saved file,
+        allowing clones to continue conversations or review past interactions.
+        
+        Args:
+            filename (str): Path to the conversation file to load
+        """
         try:
             with open(filename, 'r') as f:
                 data = json.load(f)
@@ -406,12 +550,28 @@ class AIClone:
             print(f"Error loading conversation: {e}")
     
     def get_personality_summary(self) -> str:
-        """Get a brief summary of the clone's personality"""
+        """
+        Get a brief summary of the clone's personality for display purposes.
+        
+        Returns:
+            str: A human-readable summary of the clone's basic characteristics
+        """
         basic = self.personality_data["basic_info"]
         return f"{basic['age']}-year-old {basic['occupation']} from {basic['location']}"
 
 def load_clone_from_file(personality_file: str) -> AIClone:
-    """Load a clone from a personality file"""
+    """
+    Load an AI clone from a personality JSON file.
+    
+    This utility function creates an AIClone instance from a saved personality
+    file, making it easy to recreate clones for continued conversations.
+    
+    Args:
+        personality_file (str): Path to the personality JSON file
+        
+    Returns:
+        AIClone: The loaded clone instance, or None if loading fails
+    """
     try:
         with open(personality_file, 'r') as f:
             personality_data = json.load(f)
@@ -421,7 +581,18 @@ def load_clone_from_file(personality_file: str) -> AIClone:
         return None
 
 def create_demo_clones(memory_type: str = "sqlite_vec") -> List[AIClone]:
-    """Create demo clones for testing"""
+    """
+    Create demo AI clones for testing and demonstration purposes.
+    
+    This utility function creates a set of pre-configured clones with
+    different personalities to test the system functionality.
+    
+    Args:
+        memory_type (str): Type of memory system to use (default: "sqlite_vec")
+        
+    Returns:
+        List[AIClone]: List of demo clone instances
+    """
     from personality.templates import create_demo_personalities
     
     # Create demo personalities

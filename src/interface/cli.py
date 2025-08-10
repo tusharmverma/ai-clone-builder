@@ -38,7 +38,12 @@ class AICloneCLI:
         os.makedirs(self.conversations_dir, exist_ok=True)
     
     def show_welcome(self):
-        """Show welcome screen"""
+        """
+        Display the welcome screen for the AI Clone Builder CLI.
+        
+        This method shows a formatted welcome message with the application
+        title and description to introduce users to the system.
+        """
         welcome_text = Text()
         welcome_text.append("AI Clone Builder CLI\n", style="bold blue")
         welcome_text.append("AI Clone Creator & Chat System\n\n", style="blue")
@@ -47,7 +52,12 @@ class AICloneCLI:
         console.print(Panel(welcome_text, border_style="blue", expand=False))
     
     def show_main_menu(self):
-        """Show main menu options"""
+        """
+        Display the main menu with all available options.
+        
+        This method shows a formatted table of all the main
+        functionality available in the CLI system.
+        """
         table = Table(title="Main Menu", show_header=False, box=None)
         table.add_column("Option", style="cyan")
         table.add_column("Description", style="white")
@@ -65,7 +75,18 @@ class AICloneCLI:
         console.print(table)
     
     def create_new_clone(self):
-        """Create a new AI clone via questionnaire"""
+        """
+        Create a new AI clone through an interactive questionnaire.
+        
+        This method guides users through creating a new clone by:
+        1. Prompting for a clone name
+        2. Running the personality questionnaire
+        3. Saving the personality data to a file
+        4. Loading the clone into the active clones list
+        
+        Returns:
+            AIClone: The newly created clone instance, or None if creation fails
+        """
         console.print("\n[bold green]Creating New AI Clone[/bold green]")
         
         clone_name = Prompt.ask("What should we call this clone?")
@@ -95,7 +116,15 @@ class AICloneCLI:
             return None
     
     def load_existing_clone(self):
-        """Load an existing clone from file"""
+        """
+        Load an existing AI clone from a saved personality file.
+        
+        This method allows users to load previously created clones
+        by selecting from available personality files.
+        
+        Returns:
+            AIClone: The loaded clone instance, or None if loading fails
+        """
         console.print("\n[bold green]Loading Existing Clone[/bold green]")
         
         personality_files = self.list_personality_files()
@@ -130,7 +159,12 @@ class AICloneCLI:
             return None
     
     def list_all_clones(self):
-        """List all available clones"""
+        """
+        List all available clones from saved personality files.
+        
+        This method displays a formatted table showing all saved clone
+        personalities, including their names and file locations.
+        """
         console.print("\n[bold green]Available Clones[/bold green]")
         
         personality_files = self.list_personality_files()
@@ -150,7 +184,13 @@ class AICloneCLI:
         console.print(table)
     
     def chat_with_clone(self):
-        """Chat with a selected clone"""
+        """
+        Start an interactive chat session with a selected clone.
+        
+        This method allows users to have a conversation with one of their
+        active clones. It provides a chat interface where users can type
+        messages and receive responses from the clone.
+        """
         console.print("\n[bold green]Chat with Clone[/bold green]")
         
         if not self.active_clones:
@@ -185,7 +225,13 @@ class AICloneCLI:
             console.print("[red]Please enter a valid number[/red]")
     
     def clone_to_clone_conversation(self):
-        """Start a conversation between two clones"""
+        """
+        Start a conversation between two AI clones.
+        
+        This method allows users to select two active clones and watch them
+        have a conversation with each other. The clones will take turns
+        responding based on their personalities and the conversation context.
+        """
         console.print("\n[bold green]Clone-to-Clone Conversation[/bold green]")
         
         if len(self.active_clones) < 2:
@@ -223,12 +269,23 @@ class AICloneCLI:
             console.print("[red]Please enter valid numbers[/red]")
     
     def run_demo_conversation(self):
-        """Run the demo conversation"""
+        """
+        Run the demo conversation between pre-built AI clones.
+        
+        This method launches a demonstration conversation using the
+        demo conversation system to showcase the AI clone capabilities.
+        """
         console.print("\n[bold green]Running Demo Conversation[/bold green]")
         run_demo_conversation()
     
     def run_system_test(self):
-        """Run system diagnostics"""
+        """
+        Run system diagnostics and tests.
+        
+        This method executes the system test script to verify that
+        all components are working correctly and dependencies are
+        properly installed.
+        """
         console.print("\n[bold green]Running System Test[/bold green]")
         
         try:
@@ -242,7 +299,13 @@ class AICloneCLI:
             console.print(f"[red]Test failed: {e}[/red]")
     
     def question_management_menu(self):
-        """Show question management options"""
+        """
+        Show question management options and handle user interactions.
+        
+        This method provides an interface for managing the questionnaire
+        system, allowing users to view, add, edit, and delete questions
+        from the personality creation system.
+        """
         console.print("\n[bold green]Question Management[/bold green]")
         
         try:
@@ -271,7 +334,15 @@ class AICloneCLI:
             console.print(f"[red]Question management error: {e}[/red]")
     
     def _show_question_history(self, question_manager: QuestionManager):
-        """Show question history"""
+        """
+        Display the question history in a formatted table.
+        
+        This method shows all questions in the system with their
+        metadata including ID, question text, category, and stage.
+        
+        Args:
+            question_manager (QuestionManager): The question manager instance
+        """
         questions = question_manager.get_all_questions()
         
         if not questions:
@@ -290,7 +361,15 @@ class AICloneCLI:
         console.print(table)
     
     def list_personality_files(self) -> List[str]:
-        """List all personality files"""
+        """
+        List all personality files in the personalities directory.
+        
+        This method scans the personalities directory for JSON files
+        that contain saved AI clone personalities.
+        
+        Returns:
+            List[str]: List of full file paths to personality files
+        """
         if not os.path.exists(self.personalities_dir):
             return []
         
@@ -299,7 +378,13 @@ class AICloneCLI:
         return [os.path.join(self.personalities_dir, f) for f in files]
     
     def run(self):
-        """Main application loop"""
+        """
+        Main application loop that handles user interaction.
+        
+        This method runs the main CLI loop, displaying menus and
+        handling user choices to navigate between different features
+        of the AI Clone Builder system.
+        """
         while True:
             try:
                 self.show_welcome()
@@ -339,7 +424,12 @@ class AICloneCLI:
                 input("Press Enter to continue...")
 
 def main():
-    """Main entry point"""
+    """
+    Main entry point for the AI Clone Builder CLI.
+    
+    This function creates and runs the main CLI application,
+    providing the entry point for users to interact with the system.
+    """
     cli = AICloneCLI()
     cli.run()
 

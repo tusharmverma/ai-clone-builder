@@ -12,7 +12,23 @@ class PersonalityTemplate:
     
     @staticmethod
     def create_system_prompt(personality_data: Dict[str, Any]) -> str:
-        """Create a system prompt from personality data with realistic communication"""
+        """
+        Create a comprehensive system prompt from personality data.
+        
+        This method transforms questionnaire responses into a detailed system prompt
+        that instructs the AI on how to behave like a specific person. It covers:
+        - Basic identity and background
+        - Personality traits and communication style
+        - Age-appropriate behavior and generational patterns
+        - Interests and conversation topics
+        - Communication preferences and habits
+        
+        Args:
+            personality_data (Dict[str, Any]): Complete personality questionnaire data
+            
+        Returns:
+            str: A comprehensive system prompt for the AI clone
+        """
         basic = personality_data["basic_info"]
         comm = personality_data.get("communication_style", {})
         traits = personality_data.get("personality_traits", {})
