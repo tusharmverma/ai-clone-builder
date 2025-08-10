@@ -1,108 +1,67 @@
-# 📚 ai-clone-builder Documentation
+# AI Clone Builder Documentation
 
 **Simple, clear guides to get you up and running with AI clones.**
 
-## 🚀 Getting Started (Pick One)
-
-| I want to... | Read this |
-|--------------|-----------|
-| **Try it right now** | [Quick Start](#quick-start) ⚡ |
-| **Understand what this does** | [What is ai-clone-builder?](#what-is-ai-clone-builder) 🤔 |
-| **See step-by-step setup** | [Getting Started Guide](./getting-started.md) 🔧 |
-| **See real examples** | [Simple Examples](./simple-examples.md) 🎮 |
-
-## ⚡ Quick Start
+## Quick Start
 
 **Want to see AI clones chatting in 5 minutes?**
 
 ```bash
-# 1. Install Ollama (AI engine)
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Install Ollama (AI engine)
 brew install ollama
 ollama pull llama3.2:3b
 
-# 2. Install Python packages
-pip install -r requirements.txt
-
 # 3. Run the demo
 python quick_start.py
-# Choose option 1 for instant demo!
 ```
 
-That's it! You'll see two AI clones having a natural conversation.
+## Documentation Guide
 
-## 🤔 What is ai-clone-builder?
+### **For Beginners (Start Here)**
+- **[Getting Started Guide](./getting-started.md)** - Install and run in 5 minutes
+- **[Setup Guide](./setup-guide.md)** - How the code works & memory systems
+- **[Code Examples](./code-examples.md)** - Practical code examples
 
-**Think of it like this:**
-- You create AI "clones" of people using questionnaires
-- These clones can chat with you or each other
-- Perfect for dating apps, social experiments, or just fun
-
-**Example conversation between two clones:**
-```
-Alex: Hey! Just got back from rock climbing. What have you been up to?
-
-Sam: Yaaas! I've been working on this sick mural for a coffee shop. 
-It's all about spreading positivity vibes, you know?
-
-Alex: That sounds amazing! I love that you're spreading good vibes...
-```
-
-## 📖 All Documentation
-
-### **🎯 For Beginners (Start Here)**
-- [Getting Started Guide](./getting-started.md) - Install and run in 10 minutes
-- [Simple Examples](./simple-examples.md) - See what you can actually do
-- [Troubleshooting](./troubleshooting.md) - Fix common problems
-
-### **📖 For Users**
+### **For Users**
 - [User Guide](./user-guide.md) - How to create clones and make them chat
-- [Setup Guide](./setup-guide.md) - Detailed installation instructions
+- [Simple Examples](./simple-examples.md) - See what you can actually do
 
-### **🔧 For Developers** 
+### **For Developers** 
 - [Architecture Overview](./architecture.md) - How everything works
 - [Project Overview](./project-overview.md) - Detailed technical explanation
 
-### **📅 For Planners**
+### **For Planners**
 - [Roadmap](./roadmap.md) - What's coming in Week 2, Month 2, etc.
-- [Project Log](./project-log.md) - Complete development history & decisions
 
-## 🎯 What You Can Do Right Now
+## What You Can Do Right Now
 
-### ✅ **Create AI Clones**
-- 5-10 minute personality questionnaire
-- Creates unique AI with specific traits
-- Talks like the person you described
+- **Create AI Clones** - 5-minute personality questionnaire
+- **Chat with Clones** - Natural conversations with memory
+- **Watch Clones Chat** - Two clones talk to each other
+- **Smart Memory** - SQLite vector memory remembers everything
 
-### ✅ **Chat with Clones**
-- Natural conversations
-- Remembers what you talked about
-- Consistent personality
+## Why This is Cool
 
-### ✅ **Watch Clones Chat**
-- Two clones talk to each other
-- Realistic dating scenarios
-- Automatic conversation logging
+- **Runs on Your Computer** - No cloud, no data sharing, completely private
+- **Completely Free** - Uses free local AI (LLaMA), no API costs
+- **Actually Works** - Real conversations, not just random responses
+- **Smart Memory** - Vector embeddings for intelligent conversation recall
 
-## 🔥 Why This is Cool
+## Need Help?
 
-**🏠 Runs on Your Computer** - No cloud, no data sharing, completely private
-
-**💰 Completely Free** - Uses free local AI (LLaMA), no API costs
-
-**⚡ Actually Works** - Real conversations, not just random responses
-
-**🔧 Easy to Extend** - Ready for more features in Week 2+
-
-## 🆘 Need Help?
-
-**Something not working?** Run `python test_setup.py` for diagnostics
+**Something not working?** Run `python tests/test_setup.py` for diagnostics
 
 **Want step-by-step setup?** Check the [Getting Started Guide](./getting-started.md)
 
-**Want to see examples first?** Check [Simple Examples](./simple-examples.md)
+**Want to understand the code?** Check the [Setup Guide](./setup-guide.md)
+
+**Want to see examples first?** Check [Code Examples](./code-examples.md)
 
 **Hit a problem?** Check [Troubleshooting](./troubleshooting.md)
 
 ---
 
-**Ready to create your first AI clone?** Start with the [Getting Started Guide](./getting-started.md)! 🚀 
+**Ready to create your first AI clone?** Start with the [Getting Started Guide](./getting-started.md)! 

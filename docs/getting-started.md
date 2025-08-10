@@ -1,137 +1,83 @@
-# 🚀 Getting Started with ai-clone-builder
+# Getting Started Guide
 
-**Get your first AI clone talking in under 10 minutes!**
+**Get AI clones chatting in 5 minutes!**
 
-## What You'll Build
+## Quick Start
 
-By the end of this guide, you'll have:
-- ✅ Two AI clones with different personalities  
-- ✅ Watch them have a natural conversation
-- ✅ Chat with them yourself
+### 1. Install Dependencies
+- Install Python packages: `pip install -r requirements.txt`
+- Install Ollama (the AI engine) from [ollama.com](https://ollama.com/)
 
-**Time needed:** 5-10 minutes  
-**Difficulty:** Easy (copy & paste commands)
+### 2. Download AI Model
+- Download the AI model: `ollama pull llama3.2:3b`
 
-## Step 1: Check Your Computer
+### 3. Run Demo
+- Run the quick start script: `python quick_start.py`
 
-You need:
-- **macOS, Windows, or Linux**
-- **8GB+ RAM** (for the AI to run smoothly)
-- **Internet connection** (just for setup)
+**That's it!** You'll see two AI clones having a natural conversation.
 
-## Step 2: Install the AI Engine
+## Detailed Setup
 
-**On Mac:**
-```bash
-brew install ollama
-```
+### What You Need
+- **Python 3.8 or newer** - [Download here](https://python.org)
+- **8GB or more memory** - For smooth AI generation
+- **Ollama** - Local AI engine
 
-**On Windows:**
-1. Go to [ollama.com](https://ollama.com)
-2. Download and run the installer
+### Step-by-Step
 
-**On Linux:**
-```bash
-curl -fsSL https://ollama.com/install.sh | sh
-```
-
-## Step 3: Download the AI Brain
+#### 1. Test Your Setup
+Run the setup test script to check everything is working:
 
 ```bash
-ollama pull llama3.2:3b
+python tests/test_setup.py
 ```
 
-This downloads a 2GB AI model. Grab some coffee! ☕
+This checks:
+- Python version
+- Ollama installation  
+- AI model availability
+- Python packages
 
-## Step 4: Get the Project
+#### 2. Create Your First Clone
+- Use the main interface and choose option 1 to create a clone
 
-```bash
-# Download the project
-git clone [your-repo-url]
-cd ai-clone-builder
+## What You Can Do
 
-# Install Python packages
-pip install -r requirements.txt
-```
+### Create AI Clones
+- **5-minute questionnaire** creates unique personalities
+- **Realistic traits** - interests, communication style, background
+- **Psychology-based** questions for authentic personalities
 
-## Step 5: Test Everything
+### Chat with Clones
+- **Natural conversations** with consistent personality
+- **Smart memory** remembers everything you discuss
+- **Three memory systems** (SQLite vector memory recommended)
 
-```bash
-python test_setup.py
-```
+### Watch Clones Chat
+- **Two clones talk to each other**
+- **Built-in scenarios** (coffee shop, restaurant, etc.)
+- **Automatic logging** of all conversations
 
-You should see:
-```
-✅ Python Version: PASS
-✅ Dependencies: PASS  
-✅ Project Structure: PASS
-✅ Ollama Installation: PASS
-✅ LLaMA Model: PASS
-✅ AI Clone: PASS
+## Common Issues
 
-🎉 All tests passed!
-```
-
-## Step 6: See the Magic
-
-```bash
-python quick_start.py
-```
-
-Choose **option 1** for instant demo.
-
-You'll see something like:
-```
-🗣️ Alex: Hey! Just got back from rock climbing...
-
-💭 Sam: Yaaas! I've been working on this mural...
-```
-
-## 🎉 Congratulations!
-
-You just watched two AI clones have a natural conversation!
-
-## What's Next?
-
-**Create your own clone:**
-```bash
-python quick_start.py
-# Choose option 2
-```
-
-**Explore all features:**
-```bash
-python -m src.interface.cli
-```
-
-**Learn more advanced stuff:**
-- [User Guide](./user-guide.md) - Create custom personalities
-- [Troubleshooting](./setup-guide.md#troubleshooting) - Fix common issues
-
-## 🆘 Something Went Wrong?
-
-**Most common issues:**
-
-**"ollama command not found"**
-```bash
-# Make sure Ollama is installed
-ollama --version
-```
-
-**"Cannot connect to Ollama"**
-```bash
-# Start the Ollama service
-ollama serve
-```
+**"Ollama not found"**
+- Install Ollama first from [ollama.com](https://ollama.com/)
 
 **"Model not found"**
-```bash
-# Download the model again
-ollama pull llama3.2:3b
-```
+- Download the AI model: `ollama pull llama3.2:3b`
 
-**Still stuck?** Run `python test_setup.py` and it will tell you exactly what's wrong.
+**"Connection refused"**
+- Start the Ollama service: `ollama serve`
+
+**Still having issues?** Run the setup test script for diagnostics.
+
+## Next Steps
+
+1. **Create your first clone** - Use the main interface
+2. **Try different memory types** - Simple, Enhanced, SQLite Vector
+3. **Watch clones interact** - Start conversations between them
+4. **Learn more** - Check the [Setup Guide](./setup-guide.md)
 
 ---
 
-**Ready for more?** Check out the [User Guide](./user-guide.md) to create your own AI clones! 🤖 
+**Ready to start?** Run the quick start script for the fastest demo! 

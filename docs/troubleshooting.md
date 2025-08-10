@@ -1,231 +1,100 @@
-# 🔧 Troubleshooting
+# Troubleshooting Guide
 
-**Quick fixes for common problems.**
+**Fix common problems and get AI clones working.**
 
-## 🧪 First Step: Run the Test
+## Quick Fixes
 
-Before anything else, run:
-```bash
-python test_setup.py
-```
+### Run Diagnostics First
+- Run the setup test script to tell you exactly what's wrong and how to fix it.
 
-This will tell you exactly what's wrong. Look for ❌ FAIL messages.
+## Common Issues & Solutions
 
-## Common Issues
-
-### 1. "ollama command not found"
-
-**Problem:** Ollama isn't installed or not in your PATH
+### 1. Ollama Not Found
+**Error:** Ollama command not found
 
 **Fix:**
-```bash
-# On Mac
-brew install ollama
+- **Mac**: Install using Homebrew
+- **Windows/Linux**: Download from [ollama.com](https://ollama.com/)
 
-# On Windows: Download from ollama.com
-# On Linux
-curl -fsSL https://ollama.com/install.sh | sh
+**Verify:**
+- Check if Ollama shows a version number
 
-# Test if it worked
-ollama --version
-```
-
-### 2. "Cannot connect to Ollama server"
-
-**Problem:** Ollama is installed but not running
+### 2. Ollama Not Running
+**Error:** Connection refused or Cannot connect to Ollama
 
 **Fix:**
-```bash
-# Start Ollama
-ollama serve
+- Start the Ollama service
 
-# Or start as background service (Mac)
-brew services start ollama
+**Keep it running:** Open a new terminal for other commands.
 
-# Test if it worked
-curl http://localhost:11434/api/tags
-```
-
-### 3. "llama3.2:3b model not found"
-
-**Problem:** AI model isn't downloaded
+### 3. Model Not Found
+**Error:** Model llama3.2:3b not found
 
 **Fix:**
-```bash
-# Download the model (2GB download)
-ollama pull llama3.2:3b
+- Download the model using Ollama
 
-# Check it downloaded
-ollama list
-```
+**Check available models:**
+- List all available models
 
-### 4. "No module named 'rich'"
-
-**Problem:** Python packages aren't installed
+### 4. Python Packages Missing
+**Error:** Module not found or Import error
 
 **Fix:**
-```bash
-# Install required packages
-pip install -r requirements.txt
+- Install the required packages using the requirements file
 
-# If that doesn't work, try
-pip install requests rich pydantic colorama
-```
+**If that fails:**
+- Update your package installer
+- Try installing the requirements again
 
-### 5. Slow Responses or "Out of Memory"
+### 5. Memory Too Low
+**Error:** Out of memory or very slow responses
 
-**Problem:** Your computer doesn't have enough RAM
+**Solutions:**
+- Close other applications
+- Use smaller model
+- Restart Ollama
 
-**Fix:**
-```bash
-# Use smaller model (1GB instead of 2GB)
-ollama pull llama3.2:1b
+### 6. Clone Not Responding
+**Error:** Clone created but won't chat
 
-# Then edit src/ai_clone/clone.py
-# Change: self.model = "llama3.2:3b"  
-# To: self.model = "llama3.2:1b"
-```
+**Check:**
+- Test basic functionality using the test script
 
-### 6. AI Responses Are Weird/Generic
+**If test fails:** Check Ollama connection and model availability.
 
-**Problem:** Personality isn't specific enough
+## System Tests
 
-**Fix:**
-- Be more specific in questionnaires
-- Add more details about interests
-- Use concrete examples instead of general terms
+### Test Python Setup
+- Check Python version (should be 3.8 or newer)
+- Check installed packages
 
-**Example:**
-```
-❌ "I like sports"
-✅ "I'm obsessed with basketball, watch every Lakers game, 
-    play pickup on weekends, follow NBA stats religiously"
-```
+### Test Ollama
+- Check Ollama version
+- Check available models
 
-### 7. "Import Error" or "Module Not Found"
+### Test Project
+- Run the comprehensive test script
 
-**Problem:** Python can't find the project files
+## Platform-Specific Issues
 
-**Fix:**
-```bash
-# Make sure you're in the right directory
-cd ai-clone-builder
+### macOS
+- **Permission denied:** Fix file permissions
+- **Homebrew issues:** Update and fix Homebrew
 
-# Check the files are there
-ls src/
+### Windows
+- **Path issues:** Add Ollama to system PATH
+- **Firewall:** Allow Ollama through Windows Firewall
 
-# Try running from the project root
-python -m src.interface.cli
-```
+### Linux
+- **Permission issues:** Add user to Ollama group
+- **Service not starting:** Start the Ollama service
 
-### 8. Conversations Don't Save
+## Debug Mode
 
-**Problem:** Permission issues with data folder
+### Enable Verbose Logging
+- Set environment variable for debug information
+- Run with debug info
 
-**Fix:**
-```bash
-# Check if data folder exists
-ls data/
-
-# Create if missing
-mkdir -p data/personalities data/conversations
-
-# Fix permissions (Mac/Linux)
-chmod -R 755 data/
-```
-
-## Still Stuck?
-
-### Check System Requirements
-- **RAM:** 8GB minimum (4GB for smaller model)
-- **Storage:** 3GB free space
-- **Python:** Version 3.8 or higher
-- **Internet:** Only needed for initial setup
-
-### Run Full Diagnostics
-```bash
-# Detailed system check
-python test_setup.py
-
-# Check Python version
-python --version
-
-# Check available memory
-# Mac: Activity Monitor
-# Windows: Task Manager  
-# Linux: free -h
-```
-
-### Reset Everything
-```bash
-# Stop Ollama
-brew services stop ollama  # Mac
-# Or Ctrl+C if running ollama serve
-
-# Restart Ollama  
-brew services start ollama
-
-# Re-download model
-ollama pull llama3.2:3b
-
-# Test again
-python test_setup.py
-```
-
-## Performance Tips
-
-### For Slower Computers
-```bash
-# Use smaller model
-ollama pull llama3.2:1b
-
-# Reduce conversation history
-# Edit src/ai_clone/clone.py
-# Change max_messages from 10 to 3
-```
-
-### For Better Quality
-```bash
-# Use larger model (if you have 16GB+ RAM)
-ollama pull llama3.2:8b
-
-# Increase response length
-# Edit src/ai_clone/clone.py  
-# Change max_tokens from 150 to 250
-```
-
-## Common Error Messages
-
-**"Connection refused"** → Ollama isn't running  
-**"Model not found"** → Need to download model  
-**"Permission denied"** → File permission issues  
-**"Out of memory"** → Computer doesn't have enough RAM  
-**"Module not found"** → Missing Python packages  
-**"Command not found"** → Software not installed or not in PATH
-
-## Quick Health Check
-
-Run this to verify everything is working:
-```bash
-# 1. Check Ollama
-ollama list
-
-# 2. Check Python packages
-python -c "import requests, rich; print('Packages OK')"
-
-# 3. Check project structure
-ls src/ai_clone/clone.py
-
-# 4. Test AI response
-python -c "
-import sys; sys.path.append('src')
-from ai_clone.clone import test_clone_response
-test_clone_response()
-"
-```
-
-If all these work, you're good to go!
-
----
-
-**Still having issues?** Make sure to run `python test_setup.py` first - it will tell you exactly what to fix! 🔍 
+### Check Logs
+- Check Ollama logs
+- Check system logs 

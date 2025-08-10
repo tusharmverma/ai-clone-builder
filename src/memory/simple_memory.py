@@ -1,17 +1,22 @@
 """
-Simple Memory System
-Handles conversation history and basic memory for AI clones
+Simple Memory System (DEPRECATED - Protected for Future Use)
+Basic memory system for AI clones
+Stores conversation history and provides basic context retrieval
+
+This system is now deprecated in favor of SqliteVecMemory.
+It is kept for reference and potential future use.
 """
 
 import json
 import os
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 from datetime import datetime
 
 class SimpleMemory:
-    """Simple memory system for storing and retrieving conversation history"""
+    """Simple memory system for storing conversation history (DEPRECATED)"""
     
     def __init__(self, clone_name: str):
+        print("⚠️  SimpleMemory is deprecated. Use SqliteVecMemory instead.")
         self.clone_name = clone_name
         self.memory_file = f"data/conversations/{clone_name}_memory.json"
         self.conversation_history = []
@@ -60,6 +65,14 @@ class SimpleMemory:
             context_lines.append(f"[{timestamp}] {msg['speaker']}: {msg['content']}")
         
         return "\n".join(context_lines)
+    
+    def get_context(self, max_messages: int = 10) -> str:
+        """Get recent conversation context (alias for compatibility)"""
+        return self.get_conversation_context(max_messages)
+    
+    def get_smart_context(self, message: str, max_total: int = 8) -> str:
+        """Get smart context (alias for get_context for compatibility)"""
+        return self.get_context(max_total)
     
     def save_memory(self):
         """Save memory to file"""
@@ -155,7 +168,7 @@ class ConversationManager:
             conversation["ended_at"] = datetime.now().isoformat()
             
             # Save to logs
-            self.conversation_logs.append(conversation)
+            self.save_conversation_log(conversation)
             
             # Archive to file
             self.save_conversation_log(conversation)

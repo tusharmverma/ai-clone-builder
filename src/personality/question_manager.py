@@ -58,62 +58,65 @@ class QuestionManager:
             self._add_changelog_entry(new_version, f"Added question: {category}.{key}", [f"{category}.{key}"], [])
             
             self.save_questions()
-            console.print(f"[green]✅ Added question '{key}' to category '{category}'[/green]")
+            console.print(f"[green]Added question '{key}' to category '{category}'[/green]")
             return True
             
         except Exception as e:
-            console.print(f"[red]❌ Error adding question: {e}[/red]")
+            console.print(f"[red]Error adding question: {e}[/red]")
             return False
     
     def remove_question(self, category: str, key: str) -> bool:
         """Remove a question from a category"""
+        if category not in self.questions_data["categories"] or key not in self.questions_data["categories"][category]:
+            console.print(f"[yellow]Question '{category}.{key}' not found[/yellow]")
+            return False
+        
         try:
-            if category in self.questions_data["categories"] and key in self.questions_data["categories"][category]:
-                del self.questions_data["categories"][category][key]
-                
-                # Update version and changelog
-                new_version = self._increment_version()
-                self._add_changelog_entry(new_version, f"Removed question: {category}.{key}", [], [f"{category}.{key}"])
-                
-                self.save_questions()
-                console.print(f"[green]✅ Removed question '{key}' from category '{category}'[/green]")
-                return True
-            else:
-                console.print(f"[yellow]⚠️ Question '{category}.{key}' not found[/yellow]")
-                return False
-                
+            del self.questions_data["categories"][category][key]
+            self.save_questions()
+            console.print(f"[green]Removed question '{key}' from category '{category}'[/green]")
+            return True
         except Exception as e:
-            console.print(f"[red]❌ Error removing question: {e}[/red]")
+            console.print(f"[red]Error removing question: {e}[/red]")
             return False
     
-    def list_questions(self):
+    def show_questions(self):
         """Display all questions in a formatted table"""
         console.print(Panel.fit(
-            f"[bold blue]📋 Question Management (Version {self.get_current_version()})[/bold blue]",
+            f"[bold blue]Question Management (Version {self.get_current_version()})[/bold blue]",
             border_style="blue"
         ))
         
         for category, questions in self.get_categories().items():
-            table = Table(title=f"🔹 {category.replace('_', ' ').title()}", show_header=True)
+            console.print(f"\n[bold cyan]{category.title()}:[/bold cyan]")
+            
+            if not questions:
+                console.print("  [dim]No questions[/dim]")
+                continue
+            
+            table = Table(show_header=True, header_style="bold magenta")
             table.add_column("Key", style="cyan")
+            table.add_column("Text", style="white")
             table.add_column("Type", style="yellow")
-            table.add_column("Question", style="white")
             table.add_column("Required", style="green")
+            table.add_column("Options", style="dim")
             
             for key, q_data in questions.items():
-                question_text = q_data.get("question", "")
-                if len(question_text) > 50:
-                    question_text = question_text[:47] + "..."
+                options = str(q_data.get("options", []))[:50]
+                if len(str(q_data.get("options", []))) > 50:
+                    options += "..."
+                
+                required = "Yes" if q_data.get("required", False) else "No"
                 
                 table.add_row(
                     key,
-                    q_data.get("type", "text"),
-                    question_text,
-                    "✅" if q_data.get("required", False) else "❌"
+                    q_data.get("text", "")[:40] + ("..." if len(q_data.get("text", "")) > 40 else ""),
+                    q_data.get("type", "unknown"),
+                    required,
+                    options
                 )
             
             console.print(table)
-            console.print()
     
     def get_version_diff(self, old_version: str, new_version: str = None) -> Dict[str, List[str]]:
         """Get differences between two versions"""
@@ -186,7 +189,7 @@ class QuestionManager:
         
         question_data = {
             "type": question_type,
-            "question": question_text,
+            "text": question_text, # Changed from "question" to "text"
             "required": Confirm.ask("Is this question required?", default=True)
         }
         

@@ -1,307 +1,667 @@
 {
-  "version": "2.1",
-  "last_updated": "2025-08-04",
-  "research_basis": "Based on Big Five (BFI-10/20), Communication Styles Inventory (CSI), Four-Factor Communication Model, Interpersonal Circumplex Theory, Bartholomew's Attachment Theory, Field Dependence/Independence Research, and Achievement/Affiliation/Power Motivation Theory",
-  "categories": {
-    "basic_info": {
-      "name": {
-        "type": "text",
-        "question": "What's your name?",
-        "required": true
-      },
-      "age": {
-        "type": "text",
-        "question": "What's your age?",
-        "required": true
-      },
-      "location": {
-        "type": "text",
-        "question": "Where are you from? (city/country)",
-        "required": true
-      },
-      "occupation": {
-        "type": "text",
-        "question": "What do you do for work/study?",
-        "required": true
-      }
-    },
-    "communication_style": {
-      "primary_style": {
-        "type": "multiple_choice",
-        "question": "When communicating, you naturally focus on:",
-        "options": ["Results and action - 'What do we need to accomplish?'", "Process and analysis - 'How should we approach this systematically?'", "People and relationships - 'Who will be affected and how do they feel?'", "Ideas and possibilities - 'What if we tried something completely different?'"],
-        "required": true,
-        "research_note": "Based on 4-Factor Communication Model (Action, Process, People, Ideas)"
-      },
-      "directness": {
-        "type": "multiple_choice", 
-        "question": "When you disagree with someone, you typically:",
-        "options": ["Address it immediately and directly", "Wait for the right moment but speak clearly", "Give subtle hints and hope they notice", "Avoid confrontation and find workarounds", "Completely avoid the topic"],
-        "required": true,
-        "research_note": "Based on assertiveness research from Interpersonal Circumplex Theory"
-      },
-      "expressiveness": {
-        "type": "multiple_choice",
-        "question": "In conversations, people often notice you are:",
-        "options": ["Very animated - gestures, facial expressions, vocal variety", "Moderately expressive - some gestures and tone variation", "Steady - consistent tone and minimal gestures", "Reserved - controlled expressions and measured speech", "Very contained - minimal emotional display"],
-        "required": true,
-        "research_note": "Based on Communication Styles Inventory (CSI) expressiveness dimension"
-      },
-      "conversation_pace": {
-        "type": "multiple_choice",
-        "question": "Your natural speaking and response style is:",
-        "options": ["Quick and energetic - jump right in, fast responses", "Steady and engaging - normal pace with good flow", "Thoughtful and measured - pause to consider before responding", "Deliberate and careful - take time to craft responses", "Slow and reflective - long pauses, deep consideration"],
-        "required": true,
-        "research_note": "Based on temporal aspects of communication from conversation analysis research"
-      }
-    },
-    "core_personality": {
-      "extraversion": {
-        "type": "multiple_choice",
-        "question": "You are someone who is talkative, energetic, and gets excitement from social interactions:",
-        "options": ["Strongly disagree - I'm reserved and prefer quiet environments", "Somewhat disagree - I'm more introverted than extroverted", "Neither agree nor disagree - I'm balanced", "Somewhat agree - I'm generally outgoing and social", "Strongly agree - I'm very talkative and energetic around others"],
-        "required": true,
-        "research_note": "Big Five Extraversion (BFI-10 validated items)"
-      },
-      "conscientiousness": {
-        "type": "multiple_choice",
-        "question": "You are someone who is organized, responsible, and gets tasks done efficiently:",
-        "options": ["Strongly disagree - I'm spontaneous and dislike rigid schedules", "Somewhat disagree - I'm more flexible than organized", "Neither agree nor disagree - I'm moderately organized", "Somewhat agree - I value organization and follow through", "Strongly agree - I'm very disciplined and detail-oriented"],
-        "required": true,
-        "research_note": "Big Five Conscientiousness (BFI-10 validated items)"
-      },
-      "agreeableness": {
-        "type": "multiple_choice",
-        "question": "You are someone who is cooperative, trusting, and tends to assume others have good intentions:",
-        "options": ["Strongly disagree - I'm competitive and skeptical of others", "Somewhat disagree - I'm more assertive than accommodating", "Neither agree nor disagree - I balance cooperation with self-interest", "Somewhat agree - I generally trust and help others", "Strongly agree - I'm very cooperative and assume the best in people"],
-        "required": true,
-        "research_note": "Big Five Agreeableness (BFI-10 validated items)"
-      },
-      "neuroticism": {
-        "type": "multiple_choice",
-        "question": "You are someone who stays calm under pressure and rarely feels anxious or stressed:",
-        "options": ["Strongly disagree - I often feel anxious and get stressed easily", "Somewhat disagree - I'm more prone to worry than most", "Neither agree nor disagree - I have normal stress levels", "Somewhat agree - I handle stress well and stay fairly calm", "Strongly agree - I'm very emotionally stable and rarely anxious"],
-        "required": true,
-        "research_note": "Big Five Neuroticism (reverse-scored for Emotional Stability, BFI-10 validated)"
-      },
-      "openness": {
-        "type": "multiple_choice",
-        "question": "You are someone who is curious, imaginative, and enjoys exploring new ideas and experiences:",
-        "options": ["Strongly disagree - I prefer routine and conventional approaches", "Somewhat disagree - I'm more practical than creative", "Neither agree nor disagree - I'm moderately open to new things", "Somewhat agree - I enjoy novelty and creative thinking", "Strongly agree - I'm very curious and love exploring new possibilities"],
-        "required": true,
-        "research_note": "Big Five Openness to Experience (BFI-10 validated items)"
-      }
-    },
-    "social_patterns": {
-      "conversation_initiation": {
-        "type": "multiple_choice",
-        "question": "In group conversations, you typically:",
-        "options": ["Lead and direct the conversation flow", "Contribute actively when topics interest you", "Listen mostly and add thoughtful comments", "Wait for others to include you", "Prefer to observe without much participation"],
-        "required": true,
-        "research_note": "Based on social dominance and interaction patterns research"
-      },
-      "conflict_response": {
-        "type": "multiple_choice",
-        "question": "When someone disagrees with your opinion, your instinct is to:",
-        "options": ["Argue your point with facts and logic", "Try to understand their perspective first", "Compromise to maintain harmony", "Change the subject to avoid tension", "Get frustrated but stay quiet"],
-        "required": true,
-        "research_note": "Based on interpersonal circumplex theory and conflict styles"
-      },
-      "emotional_processing": {
-        "type": "multiple_choice",
-        "question": "When you're feeling strong emotions (excited, upset, frustrated), you typically:",
-        "options": ["Express them immediately and openly", "Share them with close friends/family", "Process them internally before sharing", "Keep them private but let them show nonverbally", "Hide them completely and deal with them alone"],
-        "required": true,
-        "research_note": "Based on emotional regulation and expression research"
-      },
-      "decision_approach": {
-        "type": "multiple_choice",
-        "question": "When making important decisions, you mainly rely on:",
-        "options": ["Logical analysis of facts and data", "Gut feelings and intuition", "Advice from trusted people", "Past experiences and proven methods", "Careful research and multiple perspectives"],
-        "required": true,
-        "research_note": "Based on cognitive decision-making styles research"
-      }
-    },
-    "interests_values": {
-      "conversation_topics": {
-        "type": "text",
-        "question": "What 3-5 topics do you find yourself talking about most often? (e.g., work, movies, travel, technology, relationships)",
-        "required": true
-      },
-      "core_values": {
-        "type": "multiple_choice",
-        "question": "What matters most to you in relationships and life?",
-        "options": ["Honesty and authenticity above all", "Loyalty and mutual support", "Personal growth and learning", "Fun and shared experiences", "Achievement and success"],
-        "required": true,
-        "research_note": "Based on values theory and relationship research"
-      },
-      "social_energy": {
-        "type": "multiple_choice",
-        "question": "Your ideal way to spend free time is:",
-        "options": ["Large groups and social events", "Small gatherings with close friends", "One-on-one quality time", "Solo activities with optional company", "Complete solitude and personal projects"],
-        "required": true,
-        "research_note": "Based on extraversion and social preference research"
-      },
-      "humor_style": {
-        "type": "multiple_choice",
-        "question": "Your humor style tends to be:",
-        "options": ["Quick wit and clever wordplay", "Playful teasing and silly jokes", "Dry sarcasm and deadpan delivery", "Warm storytelling and dad jokes", "Observational comedy about everyday life"],
-        "required": true,
-        "research_note": "Based on humor styles research and personality correlations"
-      }
-    },
-    "relationship_patterns": {
-      "attachment_security": {
-        "type": "multiple_choice",
-        "question": "In close relationships, you typically feel:",
-        "options": ["Comfortable with intimacy and trusting others easily", "Want closeness but worry about being hurt or rejected", "Prefer emotional distance and value independence highly", "Crave intimacy but fear others don't want to be as close", "Comfortable depending on others when needed"],
-        "required": true,
-        "research_note": "Based on Bartholomew's 4-category adult attachment model (secure, fearful-avoidant, dismissing-avoidant, preoccupied)"
-      },
-      "relationship_conflict": {
-        "type": "multiple_choice",
-        "question": "When relationships hit challenges or conflicts, you tend to:",
-        "options": ["Address issues directly and work toward resolution", "Withdraw and give yourself space to process", "Become anxious and seek immediate reassurance", "Try to fix things by being extra accommodating", "Analyze the situation logically before responding"],
-        "required": true,
-        "research_note": "Based on attachment theory and conflict resolution styles"
-      },
-      "emotional_intimacy": {
-        "type": "multiple_choice",
-        "question": "When someone wants to get emotionally close to you, you:",
-        "options": ["Welcome it and naturally open up in return", "Feel comfortable but prefer gradual deepening", "Feel somewhat uncomfortable but try to reciprocate", "Instinctively create some distance or change topics", "Analyze their motives before deciding how to respond"],
-        "required": true,
-        "research_note": "Based on attachment theory research on intimacy comfort levels"
-      },
-      "support_seeking": {
-        "type": "multiple_choice", 
-        "question": "When you're stressed or upset, you typically:",
-        "options": ["Reach out to trusted friends or family for support", "Process internally before sharing with select people", "Want comfort but struggle to ask for it directly", "Prefer to handle things completely on your own", "Seek practical advice more than emotional support"],
-        "required": true,
-        "research_note": "Based on attachment theory and help-seeking behaviors"
-      }
-    },
-    "cognitive_processing": {
-      "information_style": {
-        "type": "multiple_choice",
-        "question": "When learning something new, you prefer to:",
-        "options": ["Break it down into detailed steps and learn systematically", "Get the big picture first, then fill in details", "Jump in and learn by trial and error", "Connect it to things you already know", "Study all angles before forming conclusions"],
-        "required": true,
-        "research_note": "Based on field dependence/independence and cognitive style research"
-      },
-      "problem_solving": {
-        "type": "multiple_choice", 
-        "question": "When facing complex problems, you naturally:",
-        "options": ["Analyze each component separately and build up solutions", "Look for patterns and creative connections", "Try multiple approaches until something works", "Seek advice and collaborate with others", "Step back to see the whole situation clearly"],
-        "required": true,
-        "research_note": "Based on cognitive processing style research and problem-solving approaches"
-      },
-      "attention_focus": {
-        "type": "multiple_choice",
-        "question": "You tend to focus on:",
-        "options": ["Specific details and concrete facts", "Overall patterns and abstract concepts", "Immediate practical applications", "How things affect people and relationships", "Multiple perspectives and possibilities"],
-        "required": true,
-        "research_note": "Based on field dependence/independence and attention research"
-      },
-      "decision_speed": {
-        "type": "multiple_choice",
-        "question": "When making decisions, you typically:",
-        "options": ["Decide quickly based on gut instinct", "Gather some info then decide fairly quickly", "Take time to consider multiple options carefully", "Research extensively before deciding", "Seek input from others before choosing"],
-        "required": true,
-        "research_note": "Based on cognitive style and decision-making research"
-      }
-    },
-    "motivation_drives": {
-      "primary_motivation": {
-        "type": "multiple_choice",
-        "question": "What motivates you most in life is:",
-        "options": ["Achieving concrete goals and measurable success", "Building meaningful relationships and helping others", "Learning, growing, and expanding your understanding", "Having new experiences and avoiding boredom", "Being recognized for your unique contributions"],
-        "required": true,
-        "research_note": "Based on achievement/affiliation/power motivation and self-determination theory"
-      },
-      "success_definition": {
-        "type": "multiple_choice",
-        "question": "You feel most accomplished when:",
-        "options": ["You exceed your own high standards and goals", "You've made a positive difference in others' lives", "You've mastered something challenging or complex", "You've pushed boundaries and tried new things", "You've gained respect and recognition from others"],
-        "required": true,
-        "research_note": "Based on achievement motivation and values research"
-      },
-      "challenge_response": {
-        "type": "multiple_choice",
-        "question": "When facing difficult goals, you:",
-        "options": ["Push harder and work more intensively", "Break it down into manageable steps", "Seek support and collaborate with others", "Look for creative or unconventional approaches", "Reassess whether the goal is worth pursuing"],
-        "required": true,
-        "research_note": "Based on achievement motivation and persistence research"
-      },
-      "energy_source": {
-        "type": "multiple_choice",
-        "question": "You get most energized by:",
-        "options": ["Completing tasks and seeing concrete results", "Connecting with people and building relationships", "Discovering new ideas and insights", "Variety, change, and novel experiences", "Having influence and making important decisions"],
-        "required": true,
-        "research_note": "Based on intrinsic/extrinsic motivation and energy source research"
-      }
-    }
-  },
+  "version": "4.1",
+  "title": "AI Clone Personality Questionnaire - Age-Appropriate & Concise",
+  "description": "Enhanced personality assessment with age-appropriate communication styles, concise responses, and realistic response patterns",
+  "created_at": "2025-01-10T00:00:00Z",
   "changelog": [
     {
-      "version": "1.0", 
-      "date": "2025-08-04",
-      "changes": "Initial question set - migrated from hardcoded questions",
-      "questions_added": [],
-      "questions_removed": []
-    },
-    {
-      "version": "2.0",
-      "date": "2025-08-04", 
-      "changes": "Complete redesign based on psychological research: Big Five (BFI-10/20), Communication Styles Inventory, 4-Factor Communication Model, Interpersonal Circumplex Theory",
-      "questions_added": [
-        "communication_style.primary_style",
-        "communication_style.directness", 
-        "communication_style.conversation_pace",
-        "core_personality.extraversion",
-        "core_personality.conscientiousness",
-        "core_personality.agreeableness", 
-        "core_personality.neuroticism",
-        "social_patterns.conversation_initiation",
-        "social_patterns.conflict_response",
-        "social_patterns.emotional_processing",
-        "social_patterns.decision_approach",
-        "interests_values.core_values",
-        "interests_values.social_energy",
-        "interests_values.humor_style"
-      ],
-      "questions_removed": [
-        "communication_style.formality",
-        "communication_style.humor",
-        "communication_style.response_length",
-        "personality_traits.extroversion",
-        "personality_traits.openness",
-        "personality_traits.emotional_style", 
-        "personality_traits.decision_making",
-        "interests.hobbies",
-        "interests.topics",
-        "interests.values",
-        "interests.conversation_starters"
+      "version": "4.1",
+      "date": "2025-01-10",
+      "changes": [
+        "Enforced concise responses - no paragraphs, max 50 characters for text inputs",
+        "Converted free-form text inputs to multiple choice with brief 'Other' options",
+        "Added character limits for name (30), location (40), occupation (35)",
+        "Updated response length options to be more realistic (shorter, like current gen)",
+        "Enhanced generation-specific language and behavior patterns",
+        "Added realistic conversation starters and communication preferences",
+        "Improved personality mapping for more human-like clones"
       ]
     },
     {
-      "version": "2.1",
-      "date": "2025-08-04",
-      "changes": "Added comprehensive psychological categories: relationship patterns (attachment theory), cognitive processing (field dependence/independence), and motivation drives (achievement/affiliation/power theory)",
-      "questions_added": [
-        "relationship_patterns.attachment_security",
-        "relationship_patterns.relationship_conflict",
-        "relationship_patterns.emotional_intimacy",
-        "relationship_patterns.support_seeking",
-        "cognitive_processing.information_style",
-        "cognitive_processing.problem_solving",
-        "cognitive_processing.attention_focus",
-        "cognitive_processing.decision_speed",
-        "motivation_drives.primary_motivation",
-        "motivation_drives.success_definition",
-        "motivation_drives.challenge_response",
-        "motivation_drives.energy_source"
-      ],
-      "questions_removed": []
+      "version": "3.1",
+      "date": "2025-01-10",
+      "changes": [
+        "Added Stage 0: Basic Information & Core Personality for all clones",
+        "Includes essential questions: basic info, communication style, Big Five traits",
+        "Maintains existing 4 stages for relationship depth",
+        "Complete personality assessment system"
+      ]
     }
-  ]
+  ],
+  "stages": {
+    "stage_0": {
+      "name": "Basic Information & Core Personality",
+      "description": "Essential foundational information required for all clones - basic details, communication preferences, and core personality traits",
+      "timing": "Immediately upon clone creation - required for all",
+      "tone": "Professional, clear, and comprehensive"
+    },
+    "stage_1": {
+      "name": "Initial Engagement & Public Persona",
+      "description": "Orientation Stage of Social Penetration Theory - Superficial, publicly observable preferences",
+      "timing": "After basic info is complete, within first 1-3 days",
+      "tone": "Casual, introductory, and non-committal"
+    },
+    "stage_2": {
+      "name": "Exploring Preferences & Light Social Attitudes", 
+      "description": "Exploratory Affective Exchange Stage - General opinions and broader lifestyle choices",
+      "timing": "After 1-2 weeks of consistent engagement",
+      "tone": "Friendly, inquisitive, and relatively light-hearted"
+    },
+    "stage_3": {
+      "name": "Deeper Values & Emotional Context",
+      "description": "Affective Exchange Stage - Personal values and emotional drivers",
+      "timing": "After 3-4 weeks of continued engagement",
+      "tone": "Reflective and empathetic, seeking genuine insights"
+    },
+    "stage_4": {
+      "name": "Personal Experiences & Commitment Signals",
+      "description": "Stable Exchange Stage - Personal experiences and long-term relationship goals",
+      "timing": "After 1-2 months of active use",
+      "tone": "Private, empathetic, and highly respectful of boundaries"
+    }
+  },
+  "categories": {
+    "stage_0_basic_info": {
+      "name": "Stage 0: Basic Information & Core Personality",
+      "description": "Essential foundational information required for all clones",
+      "questions": [
+        {
+          "id": "name",
+          "text": "What is your name?",
+          "type": "text_input",
+          "required": true,
+          "max_length": 30,
+          "placeholder": "Enter your full name"
+        },
+        {
+          "id": "age",
+          "text": "What is your age?",
+          "type": "number_input",
+          "required": true,
+          "min": 13,
+          "max": 100,
+          "placeholder": "Enter your age"
+        },
+        {
+          "id": "location",
+          "text": "Where are you located?",
+          "type": "text_input",
+          "required": true,
+          "max_length": 40,
+          "placeholder": "City, State/Province, Country"
+        },
+        {
+          "id": "occupation",
+          "text": "What is your occupation or what do you do for work?",
+          "type": "text_input",
+          "required": true,
+          "max_length": 35,
+          "placeholder": "e.g., Software Engineer, Student, Artist, etc."
+        },
+        {
+          "id": "generation",
+          "text": "What generation do you identify with?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Gen Z (1997-2012) - Digital native, social media savvy, short attention span",
+            "Millennial (1981-1996) - Grew up with internet, optimistic, work-life balance",
+            "Gen X (1965-1980) - Independent, pragmatic, tech-adaptive, skeptical",
+            "Boomer (1946-1964) - Traditional values, face-to-face communication, formal",
+            "Silent Generation (1928-1945) - Formal, respectful, traditional, patient"
+          ]
+        },
+        {
+          "id": "life_stage",
+          "text": "What life stage are you currently in?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Teenager (13-19) - School, friends, discovering identity, social media",
+            "Young Adult (20-29) - College/career, independence, relationships, figuring life out",
+            "Adult (30-49) - Career, family, responsibilities, established but busy",
+            "Middle Age (50-64) - Established, wisdom, new priorities, reflection",
+            "Senior (65+) - Retirement, legacy, reflection, slower pace"
+          ]
+        }
+      ]
+    },
+    "stage_0_communication_style": {
+      "name": "Stage 0: Communication Style Preferences",
+      "description": "How you prefer to communicate and express yourself",
+      "questions": [
+        {
+          "id": "formality",
+          "text": "How formal do you prefer to be in communication?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Very formal (professional, proper language, complete sentences)",
+            "Moderately formal (balanced, respectful, mostly proper)",
+            "Casual (hi, cool, nice, relaxed but clear)",
+            "Very casual (slang, abbreviations, like texting friends)"
+          ]
+        },
+        {
+          "id": "humor",
+          "text": "What's your preferred humor style?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Playful/silly (funny memes, dad jokes, lighthearted)",
+            "Witty/sarcastic (clever, ironic, sometimes dry)",
+            "Dry/deadpan (subtle, understated humor)",
+            "Warm/gentle (kind, uplifting, positive)",
+            "I don't use much humor (serious, focused conversations)"
+          ]
+        },
+        {
+          "id": "expressiveness",
+          "text": "How expressive are you in conversations?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Very expressive (lots of emotion, gestures, enthusiasm)",
+            "Moderately expressive (shows feelings, but balanced)",
+            "Balanced (shows some emotion, but controlled)",
+            "Reserved (calm, measured, thoughtful responses)",
+            "Very reserved (minimal expression, mostly factual)"
+          ]
+        },
+        {
+          "id": "response_length",
+          "text": "How long do you prefer your responses to be?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Very short (like texting - 1-2 sentences max)",
+            "Short and concise (2-3 sentences, to the point)",
+            "Medium length (3-4 sentences, balanced detail)",
+            "Detailed and thorough (4+ sentences, comprehensive)",
+            "Varies based on the topic and my mood"
+          ]
+        },
+        {
+          "id": "conversation_pace",
+          "text": "What's your preferred conversation pace?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Fast-paced and energetic (quick responses, lots of energy)",
+            "Moderate pace (normal speed, comfortable rhythm)",
+            "Thoughtful and measured (pause to consider, then respond)",
+            "Slow and deliberate (take time to think, careful responses)"
+          ]
+        },
+        {
+          "id": "modern_communication",
+          "text": "How do you typically communicate in modern conversations?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Use emojis and modern slang (lol, omg, tbh, fr, no cap)",
+            "Mix of modern and traditional language",
+            "Mostly traditional language with some modern touches",
+            "Very traditional and formal language",
+            "Varies based on who I'm talking to and the context"
+          ]
+        },
+        {
+          "id": "texting_style",
+          "text": "What's your texting/messaging style?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Very casual with lots of abbreviations (u, r, ur, lol, omg, ttyl)",
+            "Casual but proper spelling (hey, cool, nice, but spelled correctly)",
+            "Balanced - some abbreviations but mostly proper",
+            "Mostly proper spelling and grammar",
+            "Always proper spelling and grammar (professional style)"
+          ]
+        },
+        {
+          "id": "emoji_usage",
+          "text": "How do you feel about using emojis?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Love them! Use emojis all the time 😊",
+            "Use them sometimes, when they fit the mood",
+            "Use them occasionally, mostly for emphasis",
+            "Rarely use them, prefer words",
+            "Never use emojis, find them unnecessary"
+          ]
+        }
+      ]
+    },
+    "stage_0_core_personality": {
+      "name": "Stage 0: Core Personality Traits (Big Five)",
+      "description": "Your fundamental personality characteristics",
+      "questions": [
+        {
+          "id": "extraversion",
+          "text": "How would you describe your level of extraversion?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Very extroverted - I'm super social and love meeting people",
+            "Somewhat extroverted - I'm generally outgoing and friendly",
+            "Balanced - I'm comfortable in both social and quiet situations",
+            "Somewhat introverted - I prefer smaller groups and meaningful conversations",
+            "Very introverted - I need alone time and prefer deep conversations over small talk"
+          ]
+        },
+        {
+          "id": "openness",
+          "text": "How open are you to new experiences and ideas?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Very open - I love trying new things and exploring ideas",
+            "Quite adventurous - I'm usually up for new experiences",
+            "Moderately open - I'm willing to try some new things",
+            "Somewhat cautious - I prefer familiar routines and proven methods",
+            "Very traditional - I stick to what I know works well"
+          ]
+        },
+        {
+          "id": "conscientiousness",
+          "text": "How organized and responsible are you?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Very organized and detail-oriented - I love planning and structure",
+            "Generally organized - I keep things in order most of the time",
+            "Moderately organized - I'm organized when I need to be",
+            "Somewhat disorganized - I'm more spontaneous and flexible",
+            "Very spontaneous - I prefer to go with the flow and adapt"
+          ]
+        },
+        {
+          "id": "agreeableness",
+          "text": "How do you typically interact with others?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Very cooperative and trusting - I believe in the best in people",
+            "Generally helpful and considerate - I try to be supportive",
+            "Balanced - I'm generally helpful but also realistic",
+            "Sometimes skeptical - I'm cautious about trusting too easily",
+            "Very direct - I'm honest and straightforward, even if it's challenging"
+          ]
+        },
+        {
+          "id": "neuroticism",
+          "text": "How do you handle stress and negative emotions?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Very calm and emotionally stable - I handle stress well",
+            "Generally relaxed - I'm usually pretty chill about things",
+            "Normal stress levels - I get stressed like most people",
+            "Sometimes anxious - I can worry about things more than others",
+            "Very sensitive - I feel emotions deeply and can get overwhelmed"
+          ]
+        }
+      ]
+    },
+    "stage_0_interests_values": {
+      "name": "Stage 0: Basic Interests and Values",
+      "description": "Your fundamental interests and what you value",
+      "questions": [
+        {
+          "id": "hobbies",
+          "text": "What are your main hobbies and interests?",
+          "type": "multiple_choice",
+          "required": true,
+          "max_selections": 4,
+          "options": [
+            "Reading/Books",
+            "Gaming/Video Games",
+            "Sports/Fitness",
+            "Cooking/Food",
+            "Travel/Adventure",
+            "Music/Instruments",
+            "Art/Creativity",
+            "Technology/Tech",
+            "Nature/Outdoors",
+            "Movies/TV Shows",
+            "Photography",
+            "Writing/Journaling",
+            "Dancing",
+            "Crafting/DIY",
+            "Other (brief description)"
+          ]
+        },
+        {
+          "id": "conversation_topics",
+          "text": "What topics do you enjoy discussing?",
+          "type": "multiple_choice",
+          "required": true,
+          "max_selections": 3,
+          "options": [
+            "Technology & Innovation",
+            "Books & Literature",
+            "Travel & Culture",
+            "Philosophy & Ideas",
+            "Sports & Fitness",
+            "Music & Arts",
+            "Science & Discovery",
+            "Food & Cooking",
+            "Current Events",
+            "Personal Growth",
+            "Movies & Entertainment",
+            "Other (brief description)"
+          ]
+        },
+        {
+          "id": "core_values",
+          "text": "What are your core values or principles?",
+          "type": "multiple_choice",
+          "required": true,
+          "max_selections": 3,
+          "options": [
+            "Honesty & Integrity",
+            "Creativity & Innovation",
+            "Growth & Learning",
+            "Family & Relationships",
+            "Freedom & Independence",
+            "Justice & Fairness",
+            "Compassion & Kindness",
+            "Excellence & Quality",
+            "Adventure & Exploration",
+            "Balance & Harmony",
+            "Other (brief description)"
+          ]
+        },
+        {
+          "id": "conversation_starters",
+          "text": "How do you prefer to start conversations?",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            "Ask about their day or recent activities",
+            "Share an interesting observation or story",
+            "Ask about their interests or hobbies",
+            "Comment on something in the environment",
+            "Ask a thought-provoking question",
+            "Start with a light joke or humor",
+            "Other (brief description)"
+          ]
+        }
+      ]
+    },
+    "stage_1_initial_engagement": {
+      "name": "Stage 1: Initial Engagement & Public Persona",
+      "description": "Superficial, publicly observable preferences and general lifestyle interests",
+      "questions": [
+        {
+          "id": "energy_preference",
+          "text": "Which statement best describes your typical energy preference?",
+          "type": "single_choice",
+          "options": [
+            "I'm definitely an early bird, most productive in the morning.",
+            "I'm a night owl; I thrive later in the day.",
+            "I'm flexible; my energy varies depending on the day."
+          ]
+        },
+        {
+          "id": "music_mood_boost",
+          "text": "When it comes to music, which genre is most likely to boost your mood?",
+          "type": "single_choice",
+          "options": [
+            "Pop/Top 40",
+            "Rock/Alternative", 
+            "Electronic/Dance",
+            "Classical/Jazz",
+            "Hip Hop/R&B",
+            "Country/Folk",
+            "Other (please specify briefly)"
+          ]
+        },
+        {
+          "id": "evening_preference",
+          "text": "How do you typically prefer to spend your evenings?",
+          "type": "single_choice",
+          "options": [
+            "Quiet evenings at home (e.g., reading, watching movies).",
+            "Going out with friends (e.g., social gatherings, events).",
+            "A balanced mix of both."
+          ]
+        },
+        {
+          "id": "primary_interests",
+          "text": "Which area best represents your primary interests outside of work?",
+          "type": "multiple_choice",
+          "max_selections": 3,
+          "options": [
+            "Sports/Fitness",
+            "Arts/Creativity (e.g., painting, writing, music)",
+            "Travel/Exploration",
+            "Cooking/Foodie activities",
+            "Gaming/Tech",
+            "Volunteering/Community work",
+            "Outdoor activities/Nature",
+            "Learning/Self-improvement",
+            "Other (please specify briefly)"
+          ]
+        },
+        {
+          "id": "surprising_trait",
+          "text": "Which of these statements about yourself is most likely to surprise people?",
+          "type": "single_choice",
+          "options": [
+            "I have a hidden talent (e.g., juggling, playing an obscure instrument).",
+            "I've lived in or traveled to an unexpected number of places.",
+            "I have a surprisingly niche hobby or interest.",
+            "I have an unexpected professional background or past job.",
+            "None of these apply, or I prefer not to say."
+          ]
+        }
+      ]
+    },
+    "stage_2_exploring_preferences": {
+      "name": "Stage 2: Exploring Preferences & Light Social Attitudes",
+      "description": "General opinions, broader lifestyle choices, and preferences that reveal more about routine or social norms",
+      "questions": [
+        {
+          "id": "ideal_weekend",
+          "text": "Which best describes your ideal weekend?",
+          "type": "single_choice",
+          "options": [
+            "Adventurous and spontaneous outings.",
+            "Relaxing at home with personal projects.",
+            "Socializing with friends and family.",
+            "A mix of relaxation and mild activity."
+          ]
+        },
+        {
+          "id": "shared_humor_importance",
+          "text": "On a scale of 1 (Not Important) to 5 (Extremely Important), how important is shared humour in a relationship for you?",
+          "type": "scale",
+          "min": 1,
+          "max": 5,
+          "labels": {
+            "1": "Not Important",
+            "2": "Slightly Important", 
+            "3": "Moderately Important",
+            "4": "Very Important",
+            "5": "Extremely Important"
+          }
+        },
+        {
+          "id": "engaging_content",
+          "text": "What type of online content do you find most engaging?",
+          "type": "single_choice",
+          "options": [
+            "Educational content (e.g., documentaries, tutorials).",
+            "Entertaining content (e.g., comedy, lighthearted videos).",
+            "Inspiring stories/Personal development content.",
+            "News and current events.",
+            "Interactive content (e.g., quizzes, games)."
+          ]
+        },
+        {
+          "id": "planning_style",
+          "text": "When making plans, are you generally more inclined to be:",
+          "type": "single_choice",
+          "options": [
+            "A planner: I prefer things scheduled and organised in advance.",
+            "Spontaneous: I prefer to go with the flow and decide in the moment.",
+            "A mix of both, depending on the situation."
+          ]
+        },
+        {
+          "id": "valued_quality",
+          "text": "Which quality do you value most in a potential partner or close friend?",
+          "type": "single_choice",
+          "options": [
+            "Kindness and empathy.",
+            "Intelligence and curiosity.",
+            "Reliability and trustworthiness.",
+            "Humour and lightheartedness.",
+            "Ambition and drive."
+          ]
+        }
+      ]
+    },
+    "stage_3_deeper_values": {
+      "name": "Stage 3: Deeper Values & Emotional Context",
+      "description": "Personal values, deeper desires for connection, and insights into emotional responses",
+      "questions": [
+        {
+          "id": "greatest_passion",
+          "text": "My greatest passion is focused on [category] because it allows me to [reason]:",
+          "type": "combined_choice",
+          "category_question": "Select category:",
+          "category_options": [
+            "Creative expression (e.g., art, music, writing)",
+            "Learning and growth",
+            "Helping others/Social causes",
+            "Exploration/Adventure",
+            "Building/Innovating"
+          ],
+          "reason_question": "Select reason:",
+          "reason_options": [
+            "...express myself freely.",
+            "...value continuous self-improvement.",
+            "...believe in making a positive impact.",
+            "...pushes my boundaries.",
+            "...enjoy creating new things."
+          ]
+        },
+        {
+          "id": "challenge_approach",
+          "text": "When facing challenges or stressful situations, which approach do you most commonly take?",
+          "type": "single_choice",
+          "options": [
+            "I tend to focus on problem-solving and finding practical solutions.",
+            "I seek emotional support from trusted friends or family.",
+            "I prefer to take a break and return with a fresh perspective.",
+            "I try to learn from the experience and adapt for the future."
+          ]
+        },
+        {
+          "id": "non_negotiable_value",
+          "text": "Which of these is a non-negotiable value you seek in a significant relationship or friendship?",
+          "type": "single_choice",
+          "options": [
+            "Honesty and integrity.",
+            "Mutual respect and understanding.",
+            "Shared growth and personal development.",
+            "Emotional intelligence and empathy.",
+            "Independence and personal space."
+          ]
+        },
+        {
+          "id": "emotional_support",
+          "text": "What type of emotional support do you find most meaningful when you are struggling?",
+          "type": "single_choice",
+          "options": [
+            "Practical advice and solutions.",
+            "Active listening and validation of my feelings.",
+            "Comforting words and reassurance.",
+            "Distraction or a change of scenery."
+          ]
+        },
+        {
+          "id": "true_connection",
+          "text": "Beyond initial attraction, what makes you feel truly connected to another person?",
+          "type": "single_choice",
+          "options": [
+            "Deep, meaningful conversations.",
+            "Shared experiences and creating new memories.",
+            "Feeling understood and accepted for who I am.",
+            "Mutual vulnerability and trust."
+          ]
+        }
+      ]
+    },
+    "stage_4_personal_experiences": {
+      "name": "Stage 4: Personal Experiences & Commitment Signals",
+      "description": "Personal experiences, vulnerabilities, and insights into long-term relationship goals or commitment styles",
+      "questions": [
+        {
+          "id": "significant_life_experience",
+          "text": "Which category best describes a significant life experience that has profoundly shaped who you are today?",
+          "type": "single_choice",
+          "options": [
+            "Overcoming a major personal challenge (e.g., illness, significant loss).",
+            "A transformative travel or cultural immersion experience.",
+            "Achieving a major personal or professional goal.",
+            "A significant relationship experience (e.g., friendship, family, romantic).",
+            "A period of intense self-discovery or personal growth."
+          ]
+        },
+        {
+          "id": "personal_fears",
+          "text": "Which of these personal fears or vulnerabilities do you relate to most?",
+          "type": "single_choice",
+          "options": [
+            "Fear of failure or not living up to expectations.",
+            "Fear of rejection or not being \"enough\".",
+            "Difficulty trusting others fully.",
+            "Struggling with self-doubt or insecurity.",
+            "Fear of loneliness or being alone."
+          ]
+        },
+        {
+          "id": "building_commitment",
+          "text": "How do you primarily envision building long-term commitment and trust in a relationship?",
+          "type": "single_choice",
+          "options": [
+            "Through consistent honesty and transparency.",
+            "By sharing experiences and building a shared future.",
+            "Through mutual emotional support and understanding.",
+            "By giving each other space for individual growth while remaining connected.",
+            "Through open communication and conflict resolution."
+          ]
+        },
+        {
+          "id": "lasting_connection",
+          "text": "For you, what is the most important aspect of a genuine, lasting connection?",
+          "type": "single_choice",
+          "options": [
+            "Unwavering loyalty and reliability.",
+            "Deep emotional intimacy and vulnerability.",
+            "Shared life goals and aspirations.",
+            "Feeling truly accepted and understood.",
+            "Continuous growth and adaptation together."
+          ]
+        },
+        {
+          "id": "relationship_advice",
+          "text": "Which single piece of advice would you offer for navigating and sustaining meaningful relationships?",
+          "type": "single_choice",
+          "options": [
+            "Prioritise open and honest communication, even when difficult.",
+            "Remember to consistently show appreciation and affection.",
+            "Be willing to adapt and compromise as changes occur.",
+            "Invest time in shared experiences and building new memories.",
+            "Respect each other's individuality and give space for personal growth."
+          ]
+        }
+      ]
+    }
+  }
 } 

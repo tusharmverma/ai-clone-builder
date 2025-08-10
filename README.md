@@ -1,115 +1,73 @@
-# ai-clone-builder
+# 🤖 AI Clone Builder
 
-**Create AI clones that talk like real people and watch them chat with each other.**
+**Create AI clones with unique personalities that actually remember conversations!**
 
-Perfect for dating apps, social experiments, or just having fun with AI personalities.
+## 🚀 Quick Start (3 minutes)
 
-## ⚡ Quick Start (5 minutes)
+**Step 1: Install the basics**
+- Install Python packages by running: `pip install -r requirements.txt`
+- Install Ollama (the AI engine) from [ollama.com](https://ollama.com)
+- Download an AI model by running: `ollama pull llama3.2:3b`
 
-```bash
-# 1. Install AI engine
-brew install ollama                 # Mac
-ollama pull llama3.2:3b
+**Step 2: Try it out**
+- Run the demo: `python quick_start.py`
 
-# 2. Install Python packages  
-pip install -r requirements.txt
+## ✨ What This Does
 
-# 3. See the magic
-python quick_start.py
-# Choose option 1 for instant demo!
+- **Create AI Clones** - Build unique personalities through simple questionnaires
+- **Natural Conversations** - Clones chat like real people with consistent traits
+- **Smart Memory** - Uses intelligent storage to remember everything
+- **100% Private** - Runs on your computer, no cloud needed
+
+## 🎭 Example Conversation
+
 ```
-
-You'll watch two AI clones have a natural conversation about rock climbing, art, music festivals, and more!
-
-## 🎮 What You Can Do
-
-### ✅ **Create AI Clones**
-- 5-10 minute personality questionnaire
-- Creates unique AI with specific traits
-- Talks exactly like the person you described
-
-### ✅ **Chat with Clones**  
-- Have natural conversations
-- AI remembers what you talked about
-- Consistent personality every time
-
-### ✅ **Watch Clones Chat**
-- Two clones talk to each other
-- Built-in dating scenarios (coffee shop, restaurant, etc.)
-- Completely realistic conversations
-
-## 🔥 Why This is Cool
-
-**🏠 100% Private** - Runs on your computer, no cloud, no data sharing
-
-**💰 Completely Free** - Uses free local AI, no API costs ever
-
-**⚡ Actually Works** - Real conversations, not scripted responses
-
-**🧠 Smart Memory** - Remembers personality and conversation context
+🗣️ Alex: Just got back from rock climbing! The view was amazing.
+💭 Sam: That sounds incredible! I've been working on a mural about 
+spreading positivity. Rock climbing and art - we're both 
+adventurous souls!
+```
 
 ## 📚 Documentation
 
-**New to this?** → [Getting Started Guide](./docs/getting-started.md)
+- **[Setup Guide](./docs/setup-guide.md)** - How everything works & memory systems
+- **[Getting Started](./docs/getting-started.md)** - Step-by-step tutorial
+- **[Simple Examples](./docs/simple-examples.md)** - Easy-to-follow examples
+- **[Project Overview](./docs/project-overview.md)** - How everything fits together
+- **[Troubleshooting](./docs/troubleshooting.md)** - Fix common issues
 
-**Want examples?** → [Simple Examples](./docs/simple-examples.md)
+## 🏗️ How It's Organized
 
-**Something broken?** → [Troubleshooting](./docs/troubleshooting.md)
+Think of it like a well-organized house:
+- **Main Room** - Where AI clones are created and managed
+- **Personality Workshop** - Where you design what makes each clone special
+- **Memory Storage** - Where all conversations are saved and remembered
+- **Front Door** - How you interact with everything
 
-**Need more details?** → [Full Documentation](./docs/)
+## 🧪 Testing
 
-**Continuing work?** → [Project Log](./docs/project-log.md) (development history)
+**Check if everything works:**
+- Run all tests: `python run_tests.py`
+- Test basic setup: `python tests/test_setup.py`
 
-## 🎯 Requirements
+## 🔧 What You Need
 
-- **Computer:** Mac, Windows, or Linux
-- **RAM:** 8GB+ (4GB for smaller AI model)
-- **Python:** 3.8 or higher
-- **Time:** 10 minutes to get running
+- **Python**: Version 3.8 or newer
+- **Memory**: 8GB or more (4GB works for smaller models)
+- **Platform**: Works on Mac, Windows, or Linux
 
-## 🆘 Quick Help
+## 🆘 Need Help?
 
-**Not working?** Run this:
+**Something not working?** Try this first:
 ```bash
-python test_setup.py
+python tests/test_setup.py
 ```
 
-It will tell you exactly what to fix.
-
-**Common issues:**
-- "ollama not found" → Install Ollama from [ollama.com](https://ollama.com)
-- "model not found" → Run `ollama pull llama3.2:3b`
-- "connection refused" → Run `ollama serve`
-
-## 🎊 Example Conversation
-
-Here's what you'll see with the demo:
-
-```
-🗣️ Alex: Hey! Just got back from rock climbing in Golden Gate Park. 
-The view from the top was worth the bruises on my ego!
-
-💭 Sam: Yaaas! I'm super jealous. I've been working on this mural 
-for a coffee shop - it's all about spreading positivity vibes, 
-you know? I'm really feeling it!
-
-🗣️ Alex: That sounds amazing! What's the concept behind your mural?
-
-💭 Sam: It's about inner strength and how it manifests in daily life. 
-I want people to take a moment for themselves and embrace their 
-inner peace...
-```
-
-Alex (tech-savvy rock climber) and Sam (creative artist) stay perfectly in character throughout the entire conversation!
-
-## 🔮 What's Next
-
-This Week 1 MVP is the foundation for:
-- **Week 2:** Better memory with FAISS vector search
-- **Week 3-4:** Import real chat data (WhatsApp, Discord)
-- **Month 2:** Web interface and matchmaking integration
-- **Month 3+:** Voice chat and mobile apps
+**Common fixes:**
+- "Ollama not found" → Install from [ollama.com](https://ollama.com)
+- "Connection refused" → Start Ollama with `ollama serve`
+- "Model not found" → Download with `ollama pull llama3.2:3b`
 
 ---
 
-**Ready to create your first AI clone?** Start with the [Getting Started Guide](./docs/getting-started.md)! 🚀
+**Ready to build your first AI clone?** Check the [Setup Guide](./docs/setup-guide.md)! 🎯

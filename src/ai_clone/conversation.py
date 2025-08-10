@@ -35,39 +35,101 @@ class CloneConversation:
         self.conversation_manager = ConversationManager()
         self.current_conversation_id = None
         self.conversation_scenarios = [
+            # Original dating scenarios (6)
             "You're both at a coffee shop and just met. Start a natural conversation.",
-            "You're on a first date at a cozy restaurant. Get to know each other.",
+            "You're on a first date at a cozy restaurant. Get to know each other.", 
             "You're both waiting for a delayed flight. Strike up a conversation.",
             "You met at a mutual friend's party. Find common interests.",
             "You're both in a bookstore browsing. Start chatting about books.",
-            "You're in line at a food truck. Make conversation while waiting."
+            "You're in line at a food truck. Make conversation while waiting.",
+            
+            # Expanded dating scenarios (8)
+            "You're both at a weekend farmer's market. Start talking about the local produce.",
+            "You're waiting in line at a trendy brunch place on Sunday morning.",
+            "You're both attending a wine tasting event. Discuss your preferences.",
+            "You meet at a dog park while your pets are playing together.",
+            "You're both browsing records at a vintage music store.",
+            "You're seated next to each other at a cooking class.",
+            "You're both volunteering at a community garden on Saturday.",
+            "You meet while hiking the same trail on a beautiful morning.",
+            
+            # Social scenarios (6)
+            "You're both at a tech meetup networking event. Find professional connections.",
+            "You're waiting for the same yoga class to start. Chat about wellness.",
+            "You're both art enthusiasts at a gallery opening. Discuss the exhibits.",
+            "You meet at a book club meeting before it starts.",
+            "You're both attending a photography workshop. Share your interests.",
+            "You're at a board game cafe and decide to play together.",
+            
+            # Casual encounter scenarios (6)
+            "You're both stuck in an elevator for a few minutes. Make small talk.",
+            "You're waiting in line at the bank on a busy Friday afternoon.",
+            "You're both browsing the same section at a large bookstore.",
+            "You meet at a bus stop while waiting for public transport.",
+            "You're both shopping for groceries and reach for the same item.",
+            "You're sitting next to each other at a coffee shop with laptops.",
+            
+            # Activity-based scenarios (6)
+            "You're both taking a pottery class and working on similar projects.",
+            "You meet at a local trivia night and decide to team up.",
+            "You're both at a rooftop bar watching the sunset.",
+            "You're attending the same concert and start chatting during intermission.",
+            "You meet while browsing at a weekend antique market.",
+            "You're both waiting for your orders at a busy lunch spot."
         ]
     
-    def start_conversation(self, scenario: str = None, max_turns: int = 10) -> str:
-        """Start a conversation between the two clones"""
-        if not scenario:
-            scenario = random.choice(self.conversation_scenarios)
-        
-        # Start conversation
-        self.current_conversation_id = self.conversation_manager.start_conversation(
-            self.clone1.name, self.clone2.name, scenario
-        )
-        
+    def start_conversation(self, max_turns: int = 10):
+        """Start a conversation between two clones"""
         console.print(Panel.fit(
-            f"[bold blue]🗨️  Starting Conversation[/bold blue]\n"
-            f"Participants: {self.clone1.name} & {self.clone2.name}\n"
-            f"Scenario: {scenario}",
+            f"[bold blue]Starting Conversation[/bold blue]\n"
+            f"{self.clone1.name} and {self.clone2.name} will chat for up to {max_turns} turns",
             border_style="blue"
         ))
         
-        return self.current_conversation_id
+        # Initial greeting
+        console.print(f"\n[bold]{self.clone1.name}:[/bold] Hello! How are you doing today?")
+        
+        turn_count = 0
+        current_speaker = self.clone2
+        last_speaker = self.clone1
+        
+        while turn_count < max_turns:
+            try:
+                # Get response from current speaker
+                response = current_speaker.respond(
+                    f"Continue the conversation naturally. You're chatting with {last_speaker.name}."
+                )
+                
+                # Display response
+                console.print(f"[bold]{current_speaker.name}:[/bold] {response}")
+                
+                # Switch speakers
+                last_speaker = current_speaker
+                current_speaker = self.clone1 if current_speaker == self.clone2 else self.clone2
+                
+                turn_count += 1
+                
+                # Small delay to make conversation feel natural
+                time.sleep(1)
+                
+            except KeyboardInterrupt:
+                console.print("\n[yellow]Conversation interrupted by user[/yellow]")
+                break
+            except Exception as e:
+                console.print(f"\n[red]Error in conversation: {e}[/red]")
+                break
+        
+        console.print(f"\n[bold green]Conversation Complete[/bold green]\n")
+        console.print(f"Total turns: {turn_count}")
+        console.print(f"Messages saved to memory for both clones")
     
     def run_conversation(self, scenario: str = None, max_turns: int = 10, delay: float = 2.0):
         """Run a full conversation between clones"""
-        conv_id = self.start_conversation(scenario, max_turns)
+        # Start conversation and get conversation ID
+        conv_id = self.conversation_manager.start_conversation(self.clone1.name, self.clone2.name, scenario)
         
         # Initial message from clone1
-        initial_prompt = f"Scenario: {scenario}\nStart a natural conversation. Be yourself and engage authentically."
+        initial_prompt = f"Scenario: {scenario or 'General conversation'}\nStart a natural conversation. Be yourself and engage authentically."
         
         current_speaker = self.clone1
         other_speaker = self.clone2
@@ -93,7 +155,7 @@ class CloneConversation:
             
             # Generate response
             context_prompt = self._build_context_prompt(recent_history, conversation_history[0]["content"] if conversation_history else "")
-            response = current_speaker.respond(context_prompt, recent_history)
+            response = current_speaker.respond(context_prompt)
             
             # Display response
             self._display_message(current_speaker.name, response)
@@ -119,16 +181,15 @@ class CloneConversation:
         return conversation_history
     
     def _display_message(self, speaker: str, message: str):
-        """Display a message in a nice format"""
-        # Color coding for different speakers
+        """Display a message with appropriate styling"""
         if speaker == self.clone1.name:
-            color = "cyan"
-            icon = "🗣️"
+            color = "blue"
+        elif speaker == self.clone2.name:
+            color = "green"
         else:
-            color = "yellow"
-            icon = "💭"
+            color = "white"
         
-        console.print(f"\n[bold {color}]{icon} {speaker}:[/bold {color}]")
+        console.print(f"\n[bold {color}]{speaker}:[/bold {color}]")
         console.print(f"[{color}]{message}[/{color}]")
     
     def _build_context_prompt(self, recent_history: List[Dict], initial_context: str) -> str:
@@ -178,7 +239,7 @@ class CloneConversation:
 def run_demo_conversation():
     """Run a demo conversation with pre-built clones"""
     console.print(Panel.fit(
-        "[bold blue]🎭 Demo Conversation[/bold blue]\n"
+        "[bold blue]Demo Conversation[/bold blue]\n"
         "Creating two AI clones and watching them chat...",
         border_style="blue"
     ))
@@ -193,15 +254,15 @@ def run_demo_conversation():
         clones = create_demo_clones()
         
         if len(clones) < 2:
-            console.print("[red]❌ Need at least 2 clones for conversation[/red]")
+            console.print("[red]Need at least 2 clones for conversation[/red]")
             return
         
         # Start conversation
         conversation = CloneConversation(clones[0], clones[1])
         
         # Show clone info
-        console.print(f"\n[bold]👤 {clones[0].name}:[/bold] {clones[0].get_personality_summary()}")
-        console.print(f"[bold]👤 {clones[1].name}:[/bold] {clones[1].get_personality_summary()}")
+        console.print(f"\n[bold]{clones[0].name}:[/bold] {clones[0].get_personality_summary()}")
+        console.print(f"[bold]{clones[1].name}:[/bold] {clones[1].get_personality_summary()}")
         
         # Run conversation
         history = conversation.run_conversation(max_turns=8, delay=1.5)
@@ -209,13 +270,13 @@ def run_demo_conversation():
         return history
         
     except Exception as e:
-        console.print(f"[red]❌ Error running demo conversation: {e}[/red]")
+        console.print(f"[red]Error running demo conversation: {e}[/red]")
         return None
 
 def interactive_conversation_setup():
     """Interactive setup for clone conversations"""
     console.print(Panel.fit(
-        "[bold blue]🎮 Interactive Conversation Setup[/bold blue]\n"
+        "[bold blue]Interactive Conversation Setup[/bold blue]\n"
         "Set up a conversation between your AI clones",
         border_style="blue"
     ))
