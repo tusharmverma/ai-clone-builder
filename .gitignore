@@ -53,6 +53,9 @@ Thumbs.db
 # Logs
 *.log
 
+# AI Development Logs (private development history)
+.ai-dev-logs/
+
 # Environment variables
 .env
 .env.local 

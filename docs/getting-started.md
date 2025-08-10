@@ -1,6 +1,6 @@
 # Getting Started Guide
 
-**Get AI clones chatting in 5 minutes!**
+Get AI clones chatting in 5 minutes!
 
 ## Quick Start
 
@@ -14,14 +14,14 @@
 ### 3. Run Demo
 - Run the quick start script: `python quick_start.py`
 
-**That's it!** You'll see two AI clones having a natural conversation.
+That's it! You'll see two AI clones having a natural conversation.
 
 ## Detailed Setup
 
 ### What You Need
-- **Python 3.8 or newer** - [Download here](https://python.org)
-- **8GB or more memory** - For smooth AI generation
-- **Ollama** - Local AI engine
+- Python 3.8 or newer - [Download here](https://python.org)
+- 8GB or more memory - For smooth AI generation
+- Ollama - Local AI engine
 
 ### Step-by-Step
 
@@ -44,40 +44,40 @@ This checks:
 ## What You Can Do
 
 ### Create AI Clones
-- **5-minute questionnaire** creates unique personalities
-- **Realistic traits** - interests, communication style, background
-- **Psychology-based** questions for authentic personalities
+- 5-minute questionnaire creates unique personalities
+- Realistic traits - interests, communication style, background
+- Psychology-based questions for authentic personalities
 
 ### Chat with Clones
-- **Natural conversations** with consistent personality
-- **Smart memory** remembers everything you discuss
-- **Three memory systems** (SQLite vector memory recommended)
+- Natural conversations with consistent personality
+- Smart memory remembers everything you discuss
+- Three memory systems (SQLite vector memory recommended)
 
 ### Watch Clones Chat
-- **Two clones talk to each other**
-- **Built-in scenarios** (coffee shop, restaurant, etc.)
-- **Automatic logging** of all conversations
+- Two clones talk to each other
+- Built-in scenarios (coffee shop, restaurant, etc.)
+- Automatic logging of all conversations
 
 ## Common Issues
 
-**"Ollama not found"**
+"Ollama not found"
 - Install Ollama first from [ollama.com](https://ollama.com/)
 
-**"Model not found"**
+"Model not found"
 - Download the AI model: `ollama pull llama3.2:3b`
 
-**"Connection refused"**
+"Connection refused"
 - Start the Ollama service: `ollama serve`
 
-**Still having issues?** Run the setup test script for diagnostics.
+Still having issues? Run the setup test script for diagnostics.
 
 ## Next Steps
 
-1. **Create your first clone** - Use the main interface
-2. **Try different memory types** - Simple, Enhanced, SQLite Vector
-3. **Watch clones interact** - Start conversations between them
-4. **Learn more** - Check the [Setup Guide](./setup-guide.md)
+1. Create your first clone - Use the main interface
+2. Try different memory types - Simple, Enhanced, SQLite Vector
+3. Watch clones interact - Start conversations between them
+4. Learn more - Check the [Setup Guide](./setup-guide.md)
 
 ---
 
-**Ready to start?** Run the quick start script for the fastest demo! 
+Ready to start? Run the quick start script for the fastest demo! 
