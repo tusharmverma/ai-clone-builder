@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 
 class LiveCloneConversation:
     def __init__(self):
+        # Live conversation demo system
         self.clones = {}
         self.conversation_history = []
         self.current_time = datetime.now().replace(hour=9, minute=0, second=0, microsecond=0)

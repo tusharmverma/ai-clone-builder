@@ -74,6 +74,8 @@ def run_test_script(script_path: str) -> dict:
 
 def main():
     """Main test runner"""
+    
+    # Main test runner
     console.print(Panel.fit(
         "[bold green]🧪 AI Clone Builder Test Runner[/bold green]\n"
         "Running all test scripts to verify system functionality",

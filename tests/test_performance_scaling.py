@@ -13,6 +13,8 @@ from ai_clone.clone import create_demo_clones
 
 def test_memory_scaling():
     """Test how memory performance scales with data size"""
+    
+    # Test memory scaling performance
     print("🧪 Testing Memory Performance Scaling")
     print("=" * 50)
     

@@ -17,6 +17,8 @@ console = Console()
 
 def test_memory_selection():
     """Test how memory selection works with different data sizes"""
+    
+    # Test memory selection functionality
     console.print(Panel.fit(
         "[bold blue]🧠 Intelligent Memory Selection Test[/bold blue]\n"
         "Testing auto-selection based on data size and performance",

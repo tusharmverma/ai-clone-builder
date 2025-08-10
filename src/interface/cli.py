@@ -26,6 +26,8 @@ console = Console()
 class AICloneCLI:
     """Main CLI application for AI clones"""
     
+    # Main CLI interface for AI clone management
+    
     def __init__(self):
         self.active_clones = {}
         self.personalities_dir = "data/personalities"

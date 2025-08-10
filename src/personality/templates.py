@@ -8,6 +8,8 @@ from typing import Dict, Any
 class PersonalityTemplate:
     """Converts personality data into AI prompts with realistic communication patterns"""
     
+    # Creates detailed system prompts from personality data
+    
     @staticmethod
     def create_system_prompt(personality_data: Dict[str, Any]) -> str:
         """Create a system prompt from personality data with realistic communication"""

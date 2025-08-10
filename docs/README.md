@@ -18,7 +18,9 @@ ollama pull llama3.2:3b
 python quick_start.py
 ```
 
-## Documentation Guide
+## Documentation
+
+<!-- Documentation index --> Guide
 
 ### For Beginners (Start Here)
 - [Getting Started Guide](./getting-started.md) - Install and run in 5 minutes

@@ -18,6 +18,8 @@ console = Console()
 
 def main():
     """Main quick start function"""
+    
+    # Quick start entry point
     console.print(Panel.fit(
         "[bold blue]AI Clone Builder Quick Start[/bold blue]\n"
         "Get up and running with AI clones in minutes!",

@@ -123,6 +123,8 @@ class SimpleMemory:
 class ConversationManager:
     """Manages conversations between multiple AI clones"""
     
+    # Manages clone-to-clone conversations
+    
     def __init__(self):
         self.active_conversations = {}
         self.conversation_logs = []

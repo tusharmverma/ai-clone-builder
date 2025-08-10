@@ -1,4 +1,6 @@
 # Core dependencies
+
+# Main project requirements
 requests==2.31.0
 ollama==0.3.3
 pydantic==2.5.0

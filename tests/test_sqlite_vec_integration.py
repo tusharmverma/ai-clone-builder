@@ -17,6 +17,8 @@ console = Console()
 
 def test_memory_types():
     """Test SQLite vector memory system"""
+    
+    # Test SQLite vector memory integration
     console.print(Panel.fit(
         "[bold blue]🧠 Testing SQLite Vector Memory[/bold blue]\n"
         "Testing the primary memory system with vector capabilities",

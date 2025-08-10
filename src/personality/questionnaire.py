@@ -18,6 +18,8 @@ console = Console()
 class QuestionnaireManager:
     """Manages questionnaire loading and personality creation with phased approach"""
     
+    # Interactive personality creation system
+    
     def __init__(self):
         self.questions_file = "data/questions.json"
         self.questions_data = self._load_questions()

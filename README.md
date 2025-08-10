@@ -1,5 +1,7 @@
 # AI Clone Builder
 
+<!-- Main project overview -->
+
 Create AI clones with unique personalities that actually remember conversations!
 
 ## Quick Start (3 minutes)

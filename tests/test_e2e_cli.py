@@ -23,6 +23,8 @@ console = Console()
 
 def test_imports():
     """Test that all major modules can be imported"""
+    
+    # Test CLI import functionality
     console.print("🔍 Testing imports...")
     
     try:

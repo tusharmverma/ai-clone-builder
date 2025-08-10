@@ -29,6 +29,8 @@ class MemoryManager:
     and tracks performance over time
     """
     
+    # Auto-selects optimal memory system based on performance
+    
     def __init__(self, clone_name: str, auto_select: bool = True):
         self.clone_name = clone_name
         self.auto_select = auto_select

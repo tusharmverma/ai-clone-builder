@@ -30,6 +30,8 @@ except ImportError:
 class AIClone:
     """An AI clone with personality that can have conversations"""
     
+    # Main AI clone class for personality-driven conversations
+    
     def __init__(self, personality_data: Dict[str, Any], ollama_host: str = "http://localhost:11434", memory_type: str = "sqlite_vec"):
         self.personality_data = personality_data
         self.name = personality_data["basic_info"]["name"]

@@ -29,6 +29,8 @@ console = Console()
 class CloneConversation:
     """Manages conversations between two AI clones"""
     
+    # Manages clone-to-clone conversations with scenarios
+    
     def __init__(self, clone1: AIClone, clone2: AIClone):
         self.clone1 = clone1
         self.clone2 = clone2

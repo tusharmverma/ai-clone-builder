@@ -1,4 +1,6 @@
-# Getting Started Guide
+# Getting Started
+
+<!-- Quick start guide --> Guide
 
 Get AI clones chatting in 5 minutes!
 
